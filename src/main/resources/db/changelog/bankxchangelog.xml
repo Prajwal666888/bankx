@@ -65,4 +65,19 @@
 		</createTable>
 	</changeSet>
 	
+	<!--ChangeSet for the table "Branch" -->
+	<changeSet author="sachin" id="6"> 
+	
+		<createTable tableName="Branch">
+			
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			
+			<column name="type" type="VARCHAR(255)" />
+			<column name="location" type="VARCHAR(255)" />
+			
+		</createTable>
+	</changeSet>
+	
 </databaseChangeLog>
