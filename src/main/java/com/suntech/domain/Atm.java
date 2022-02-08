@@ -8,6 +8,7 @@ import javax.persistence.Table;
  * @author sujay
  *
  */
+
 @Entity
 @Table(name = "atm")
 public class Atm extends IdDomain {

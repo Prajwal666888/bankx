@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="AccountType")
-public class AccountType {
+public class AccountType  extends IdDomain {
 	
 	@Column(name="transactionlimit")
 	private Double transactionlimit;

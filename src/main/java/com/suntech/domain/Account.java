@@ -6,13 +6,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Account")
-public class Account {
+public class Account extends IdDomain{
 	
-
 	@Column(name="accountno")
 	private Long accountno;
+	
 	@Column(name="balance")
 	private Double balance;
+	
 	@Column(name="overdraft")
 	private Double overdraft;
 	
