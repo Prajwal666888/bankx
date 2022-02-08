@@ -17,5 +17,19 @@
 			
 		</createTable>
 	</changeSet>
+	<changeSet author="pavan" id="1"> 
+	
+		<createTable tableName="employee">
+			
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			
+			<column name="name" type="VARCHAR(255)" />
+			<column name="type" type="VARCHAR(255)" />
+			<column name="salary" type="DOUBLE" />
+			
+		</createTable>
+	</changeSet>
 	
 </databaseChangeLog>
