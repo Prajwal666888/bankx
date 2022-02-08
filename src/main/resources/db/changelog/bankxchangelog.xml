@@ -31,5 +31,34 @@
 			
 		</createTable>
 	</changeSet>
+	<changeSet author="sachin" id="1"> 
+	
+		<createTable tableName="Account">
+			
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			
+			<column name="accountno" type="LONG" />
+			<column name="balance" type="DOUBLE" />
+			<column name="overdraft" type="DOUBLE" />
+			
+		</createTable>
+	</changeSet>
+	<changeSet author="sachin" id="1"> 
+	
+		<createTable tableName="AccountType">
+			
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			
+			<column name="transactionlimit" type="DOUBLE" />
+			<column name="depositamt" type="DOUBLE" />
+			<column name="withdrawllimit" type="DOUBLE" />
+			<column name="interestrate" type="DOUBLE" />
+			
+		</createTable>
+	</changeSet>
 	
 </databaseChangeLog>
