@@ -19,8 +19,11 @@ public class Atm extends IdDomain {
 	@Column(name = "amountofcash", nullable = false)
 	private Double amountOfCash;
 
+	
+
 	public Atm() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Atm(String location, Double amountOfCash) {
