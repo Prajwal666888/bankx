@@ -6,6 +6,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
 	<!--ChangeSet for the table "ATM" -->
+	
 	<changeSet author="sujay" id="1">
 
 		<createTable tableName="atm">
@@ -86,9 +87,9 @@
 
 		</createTable>
 	</changeSet>
-<<<<<<< HEAD
+	
+<!--  Commit check by Prajwal--> 
 
-=======
 	
 	
 	<!--ChangeSet for the table "Shareholders" -->
@@ -142,6 +143,5 @@
 			
 		</createTable>
 	</changeSet>
-	
->>>>>>> 4219c3390aaa64cdd6ecd4bff3d2e719f470daaf
+
 </databaseChangeLog>
