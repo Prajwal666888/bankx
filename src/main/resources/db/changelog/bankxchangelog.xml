@@ -31,6 +31,7 @@
 			
 		</createTable>
 	</changeSet>
+	<!--ChangeSet for the table "Account" -->
 	<changeSet author="sachin" id="1"> 
 	
 		<createTable tableName="Account">
@@ -45,6 +46,7 @@
 			
 		</createTable>
 	</changeSet>
+	<!--ChangeSet for the table "AccountType" -->
 	<changeSet author="sachin" id="1"> 
 	
 		<createTable tableName="AccountType">

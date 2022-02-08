@@ -4,9 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
+/**
+ * @author Sachin
+ *
+ */
 @Entity
 @Table(name="Account")
-public class Account {
+public class Account extends IdDomain{
 	
 
 	@Column(name="accountno")
