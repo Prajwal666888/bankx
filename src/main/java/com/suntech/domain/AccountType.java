@@ -4,67 +4,41 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * @author Sachin
- *
- */
 @Entity
-@Table(name = "AccountType")
-public class AccountType extends IdDomain {
-
-	@Column(name = "transactionlimit")
-	private Double transactionLimit;
-
-	@Column(name = "depositamt")
-	private Double depositAmt;
-
-	@Column(name = "withdrawllimit")
-	private Double withdrawlLimit;
-
-	@Column(name = "interestrate")
-	private Double interestRate;
-
-	public AccountType() {
-		super();
+@Table(name="AccountType")
+public class AccountType  extends IdDomain {
+	
+	@Column(name="transactionlimit")
+	private Double transactionlimit;
+	@Column(name="depositamt")
+	private Double depositamt;
+	@Column(name="withdrawllimit")
+	private Double withdrawllimit;
+	@Column(name="interestrate")
+	private Double interestrate;
+	public Double getTransactionlimit() {
+		return transactionlimit;
 	}
-
-	public AccountType(Double transactionLimit, Double depositAmt, Double withdrawlLimit, Double interestRate) {
-		super();
-		this.transactionLimit = transactionLimit;
-		this.depositAmt = depositAmt;
-		this.withdrawlLimit = withdrawlLimit;
-		this.interestRate = interestRate;
+	public void setTransactionlimit(Double transactionlimit) {
+		this.transactionlimit = transactionlimit;
 	}
-
-	public Double getTransactionLimit() {
-		return transactionLimit;
+	public Double getDepositamt() {
+		return depositamt;
 	}
-
-	public void setTransactionLimit(Double transactionLimit) {
-		this.transactionLimit = transactionLimit;
+	public void setDepositamt(Double depositamt) {
+		this.depositamt = depositamt;
 	}
-
-	public Double getDepositAmt() {
-		return depositAmt;
+	public Double getWithdrawllimit() {
+		return withdrawllimit;
 	}
-
-	public void setDepositAmt(Double depositAmt) {
-		this.depositAmt = depositAmt;
+	public void setWithdrawllimit(Double withdrawllimit) {
+		this.withdrawllimit = withdrawllimit;
 	}
-
-	public Double getWithdrawlLimit() {
-		return withdrawlLimit;
+	public Double getInterestrate() {
+		return interestrate;
 	}
-
-	public void setWithdrawlLimit(Double withdrawlLimit) {
-		this.withdrawlLimit = withdrawlLimit;
-	}
-
-	public Double getInterestRate() {
-		return interestRate;
-	}
-
-	public void setInterestRate(Double interestRate) {
-		this.interestRate = interestRate;
+	public void setInterestrate(Double interestrate) {
+		this.interestrate = interestrate;
 	}
 }
+	
