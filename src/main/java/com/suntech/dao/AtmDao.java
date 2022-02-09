@@ -1,5 +1,9 @@
 package com.suntech.dao;
 
-public interface AtmDao {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.suntech.domain.Atm;
+
+public interface AtmDao extends JpaRepository<Atm, Integer> {
 
 }
