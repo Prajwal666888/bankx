@@ -17,6 +17,9 @@ public class Bank extends IdDomain {
 	@Column(name="head_office")
 	private String head_office;
 
+	public Bank() {
+	}
+
 	public Bank(String name, String type, String head_office) {
 		super();
 		this.name = name;
