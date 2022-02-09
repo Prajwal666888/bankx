@@ -2,8 +2,8 @@ package com.suntech.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.suntech.domain.Branch;
+import com.suntech.domain.Branches;
 
-public interface BranchDao extends JpaRepository<Branch, Integer>{
+public interface BranchDao extends JpaRepository<Branches, Integer>{
 
 }
