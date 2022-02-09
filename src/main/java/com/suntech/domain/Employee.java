@@ -18,6 +18,11 @@ public class Employee extends IdDomain  {
 	@Column(name="salary")
 	private Double salary;
 
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Employee(String name, String type, Double salary) {
 		super();
 		this.name = name;
