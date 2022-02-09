@@ -1,50 +1,88 @@
 package com.suntech.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 /**
- * @author stephan 
+ * @author stephan
  *
  */
 @Entity
-@Table(name="shareholder")
-public class Shareholders extends IdDomain{
-	
-	@Column(name="name")
-	private String name;
-	
-	
+@Table(name = "shareholder")
+public class Shareholders extends IdDomain {
 
-	
+	@Column(name = "name")
+	private String name;
+
+	@OneToMany(mappedBy = "shareholders", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Shares> shares = new ArrayList<Shares>();
+
+	@OneToOne(mappedBy = "shareholders", cascade = CascadeType.ALL)
+	private Employee employee;
+
+	@OneToOne(mappedBy = "shareholders", cascade = CascadeType.ALL)
+	private Customer customer;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Bank bank;
+
 	public Shareholders() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public Shareholders(String name) {
 		super();
 		this.name = name;
 	}
 
-
-
 	public String getName() {
 		return name;
 	}
 
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
-	
+
+	public List<Shares> getShares() {
+		return shares;
+	}
+
+	public void setShares(List<Shares> shares) {
+		this.shares = shares;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Bank getBank() {
+		return bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
 
 }
