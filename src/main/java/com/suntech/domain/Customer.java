@@ -1,5 +1,6 @@
 package com.suntech.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ public class Customer extends IdDomain {
 	private String name;
 
 	@Column(name = "dob", nullable = false)
-	private Timestamp dob;
+	private Date dob;
 
 	@Column(name = "address")
 	private String address;
@@ -34,7 +35,7 @@ public class Customer extends IdDomain {
 		super();
 	}
 
-	public Customer(String name, Timestamp dob, String address, Long accountNo, String panNo) {
+	public Customer(String name, Date dob, String address, Long accountNo, String panNo) {
 		super();
 		this.name = name;
 		this.dob = dob;
@@ -51,11 +52,11 @@ public class Customer extends IdDomain {
 		this.name = name;
 	}
 
-	public Timestamp getDob() {
+	public Date getDob() {
 		return dob;
 	}
 
-	public void setDob(Timestamp dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
