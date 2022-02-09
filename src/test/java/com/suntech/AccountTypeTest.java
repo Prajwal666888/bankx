@@ -1,0 +1,77 @@
+package com.suntech;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import com.suntech.dao.AccountTypeDao;
+import com.suntech.dao.AccountTypeDao;
+import com.suntech.domain.AccountType;
+import com.suntech.domain.Atm;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+public class AccountTypeTest {
+
+	@Autowired
+	private AccountTypeDao accountTypeDao;
+
+	@Test
+	public void testAccountType() {
+		AccountType createAccountType = createAccountType();
+
+		try {
+
+			AccountType insertedAccountType = accountTypeDao.save(createAccountType);
+			System.out.println("Data saved");
+			// validating created atm inserted atm.
+			validateEquals(createAccountType, insertedAccountType);
+
+			AccountType changeAccountType = changeAccountType(insertedAccountType);
+			// validating after updting the data
+			AccountType updatedAccountType = accountTypeDao.save(createAccountType);
+			System.out.println("Data updated");
+			validateEquals(changeAccountType, updatedAccountType);
+		} catch (Exception e) {
+			System.out.println("error during executing test case for CRUD AccountType");
+		} finally {
+			if (null != createAccountType.getId()) {
+				Optional<AccountType> deleteAccountType = accountTypeDao.findById(createAccountType.getId());
+				accountTypeDao.delete(deleteAccountType.get());
+				System.out.println("data deleated");
+			}
+
+		}
+
+	}
+
+	public AccountType createAccountType() {
+		AccountType accountType = new AccountType();
+		accountType.setTransactionlimit(5000.00);
+		accountType.setDepositamt(4000.00);
+		accountType.setWithdrawllimit(6000.00);
+		accountType.setInterestrate(25.00);
+		return accountType;
+	}
+
+	public AccountType changeAccountType(AccountType accountType) {
+		accountType.setTransactionlimit(5100.00);
+		accountType.setDepositamt(4100.00);
+		accountType.setWithdrawllimit(6100.00);
+		accountType.setInterestrate(26.00);
+		return accountType;
+	}
+
+	public void validateEquals(AccountType AccountType, AccountType updatedAccountType) {
+		assertEquals(AccountType.getTransactionlimit(), updatedAccountType.getTransactionlimit());
+		assertEquals(AccountType.getDepositamt(), updatedAccountType.getDepositamt());
+		assertEquals(AccountType.getWithdrawllimit(), updatedAccountType.getWithdrawllimit());
+		assertEquals(AccountType.getInterestrate(), updatedAccountType.getInterestrate());
+	}
+}
