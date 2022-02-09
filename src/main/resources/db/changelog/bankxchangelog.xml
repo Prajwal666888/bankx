@@ -141,4 +141,37 @@
 		</createTable>
 	</changeSet>
 	
+	<!-- Change set for table bank -->
+	
+	<changeSet id="6" author="Prajwal">
+		<createTable tableName="Bank">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="VARCHAR(255)"/>
+			<column name="type" type="VARCHAR(255)"/>
+			<column name="head_office" type="VARCHAR(255)"/>
+		</createTable>
+		
+	</changeSet>
+	
+	<!-- Change Set for table Insurance -->
+		
+		<changeSet id="8" author="Prajwal">
+			<createTable tableName="insurance">
+				<column autoIncrement="true" name="id" type="INT">
+					<constraints primaryKey="true"/>
+				</column>
+				
+				<column name="issuing_company" type="VARCHAR(255)"/>
+				<column name="type" type="VARCHAR(255)"/>
+				<column name="premium_payment" type="DOUBLE"/>
+				<column name="term" type="INT"/>
+			</createTable>
+		
+		</changeSet>
+	
+	
+	
+	
 </databaseChangeLog>
