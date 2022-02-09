@@ -28,7 +28,7 @@ public class Insurance extends IdDomain {
 	}
 
 	public Insurance() {
-		super();
+
 	}
 
 	public String getIssuing_company() {
