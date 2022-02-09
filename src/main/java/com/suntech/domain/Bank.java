@@ -1,7 +1,10 @@
 package com.suntech.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +19,53 @@ public class Bank extends IdDomain {
 	
 	@Column(name="head_office")
 	private String head_office;
+	
+	@OneToMany
+	private List<Atm>atm;
+	
+	public List<Atm> getAtm() {
+		return atm;
+	}
 
+	public void setAtm(List<Atm> atm) {
+		this.atm = atm;
+	}
+
+	public List<Employee> getEmp() {
+		return emp;
+	}
+
+	public void setEmp(List<Employee> emp) {
+		this.emp = emp;
+	}
+
+	public List<Customer> getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(List<Customer> customer) {
+		this.customer = customer;
+	}
+
+	public List<Shareholders> getSh() {
+		return sh;
+	}
+
+	public void setSh(List<Shareholders> sh) {
+		this.sh = sh;
+	}
+
+	@OneToMany
+	private List<Employee>emp;
+	
+	@OneToMany
+	private List<Customer>customer;
+	
+	@OneToMany
+	private List<Shareholders>sh;
+	
+	
+	
 	public Bank() {
 	}
 

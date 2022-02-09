@@ -19,6 +19,8 @@ public class Insurance extends IdDomain {
 	
 	@Column(name="term")
 	private Integer term;
+	
+	
 
 	public Insurance(String issuing_company, String type, Double premium_payment, Integer term) {
 		this.issuing_company = issuing_company;
