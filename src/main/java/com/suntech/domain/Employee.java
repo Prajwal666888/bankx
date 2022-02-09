@@ -1,7 +1,11 @@
 package com.suntech.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -18,6 +22,16 @@ public class Employee extends IdDomain  {
 	@Column(name="salary")
 	private Double salary;
 
+	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "employee",orphanRemoval = true)
+	private Shareholders shareholders;
+	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "employee",orphanRemoval = true)
+	private Customer customer;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Bank bank;
+	
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -52,6 +66,30 @@ public class Employee extends IdDomain  {
 
 	public void setSalary(Double salary) {
 		this.salary = salary;
+	}
+
+	public Shareholders getShareholders() {
+		return shareholders;
+	}
+
+	public void setShareholders(Shareholders shareholders) {
+		this.shareholders = shareholders;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Bank getBank() {
+		return bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 	
 	

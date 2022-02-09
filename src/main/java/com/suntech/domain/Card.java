@@ -2,30 +2,35 @@ package com.suntech.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-
 
 /**
  * @author stephan
  *
  */
 @Entity
-@Table(name="card")
-public class Card extends IdDomain{
+@Table(name = "card")
+public class Card extends IdDomain {
 
-	
-	@Column(name="accountno")
+	@Column(name = "accountno")
 	private Long accountNo;
-	
-	@Column(name="cardno")
+
+	@Column(name = "cardno")
 	private Long cardNo;
-		
-	@Column(name="validfrom")
+
+	@Column(name = "validfrom")
 	private String validFrom;
-	
-	@Column(name="validto")
+
+	@Column(name = "validto")
 	private String validTo;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Account account;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Customer customer;
 
 	public Card() {
 		super();
@@ -72,8 +77,20 @@ public class Card extends IdDomain{
 		this.validTo = validTo;
 	}
 
-	
+	public Account getAccount() {
+		return account;
+	}
 
-	
-		
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 }
