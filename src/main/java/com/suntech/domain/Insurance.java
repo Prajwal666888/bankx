@@ -1,7 +1,12 @@
 package com.suntech.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +24,11 @@ public class Insurance extends IdDomain {
 	
 	@Column(name="term")
 	private Integer term;
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "insurance")
+	private List<Customer> customers=new ArrayList<>();
+	
+	
 
 	public Insurance(String issuing_company, String type, Double premium_payment, Integer term) {
 		this.issuing_company = issuing_company;
@@ -62,6 +72,16 @@ public class Insurance extends IdDomain {
 	public void setTerm(Integer term) {
 		this.term = term;
 	}
+
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+	
+	
 	
 	
 }

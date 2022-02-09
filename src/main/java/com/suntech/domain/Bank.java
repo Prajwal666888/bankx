@@ -1,7 +1,12 @@
 package com.suntech.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +21,25 @@ public class Bank extends IdDomain {
 	
 	@Column(name="head_office")
 	private String head_office;
-
+	
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
+	private List<Atm>atm=new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
+	private List<Employee> employees=new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
+	private List<Customer> customers=new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
+	private List<Shareholders> shareHolders=new ArrayList<>();
+	
+	
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
+	private List<Branches> branches=new ArrayList<>();
+	
 	public Bank() {
+		
 	}
 
 	public Bank(String name, String type, String head_office) {
@@ -50,6 +72,49 @@ public class Bank extends IdDomain {
 	public void setHead_office(String head_office) {
 		this.head_office = head_office;
 	}
+
+	public List<Atm> getAtm() {
+		return atm;
+	}
+
+	public void setAtm(List<Atm> atm) {
+		this.atm = atm;
+	}
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+
+	public List<Shareholders> getShareHolders() {
+		return shareHolders;
+	}
+
+	public void setShareHolders(List<Shareholders> shareHolders) {
+		this.shareHolders = shareHolders;
+	}
+
+	public List<Branches> getBranches() {
+		return branches;
+	}
+
+	public void setBranches(List<Branches> branches) {
+		this.branches = branches;
+	}
+	
+	
+	
 	
 	
 }
