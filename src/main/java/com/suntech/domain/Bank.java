@@ -14,7 +14,7 @@ public class Bank extends IdDomain {
 	@Column(name="type")
 	private String type;
 	
-	@Column(name="Head_Office")
+	@Column(name="head_office")
 	private String head_office;
 
 	public Bank(String name, String type, String head_office) {
