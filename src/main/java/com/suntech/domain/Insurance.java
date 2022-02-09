@@ -10,25 +10,23 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="insurance")
+@Table(name = "insurance")
 public class Insurance extends IdDomain {
-	
-	@Column(name="issuing_company")
+
+	@Column(name = "issuing_company")
 	private String issuing_company;
-	
-	@Column(name="type")
+
+	@Column(name = "type")
 	private String type;
-	
-	@Column(name="premium_payment")
+
+	@Column(name = "premium_payment")
 	private Double premium_payment;
-	
-	@Column(name="term")
+
+	@Column(name = "term")
 	private Integer term;
-	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "insurance")
-	private List<Customer> customers=new ArrayList<>();
-	
-	
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "insurance")
+	private List<Customer> customers = new ArrayList<>();
 
 	public Insurance(String issuing_company, String type, Double premium_payment, Integer term) {
 		this.issuing_company = issuing_company;
@@ -80,8 +78,5 @@ public class Insurance extends IdDomain {
 	public void setCustomers(List<Customer> customers) {
 		this.customers = customers;
 	}
-	
-	
-	
-	
+
 }

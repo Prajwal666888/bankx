@@ -1,191 +1,130 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-	
-	<!--ChangeSet for the table "ATM" -->
-	
 
-	<changeSet author="sujay" id="1"> 
-	
-		<createTable tableName="atm">
-			
+	<!-- Change set for table bank -->
+
+	<changeSet author="pramod" id="bank.1">
+		<createTable tableName="bank">
 			<column autoIncrement="true" name="id" type="INT">
 				<constraints primaryKey="true" />
 			</column>
-			
-			<column name="location" type="VARCHAR(255)" />
-			<column name="amountofcash" type="DOUBLE" />
-			
+			<column name="name" type="VARCHAR(255)" />
+			<column name="type" type="VARCHAR(255)" />
+			<column name="head_office" type="VARCHAR(255)" />
 		</createTable>
 	</changeSet>
-	<changeSet author="pavan" id="1"> 
-	
-		<createTable tableName="employee">
-			
+
+	<!--ChangeSet for the table "ATM" -->
+	<changeSet author="pramod" id="atm.1">
+
+		<createTable tableName="atm">
+
 			<column autoIncrement="true" name="id" type="INT">
 				<constraints primaryKey="true" />
 			</column>
-			
+
+			<column name="location" type="VARCHAR(255)" />
+
+			<column name="amountofcash" type="DOUBLE" />
+
+			<column name="bank_id" type="int">
+				<constraints nullable="true" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<!-- Foreign key Constraints for Atm Entity -->
+	<changeSet author="pramod" id="atm.2">
+		<addForeignKeyConstraint
+			constraintName="fk_bank_atm_id" baseColumnNames="bank_id"
+			baseTableName="atm" referencedColumnNames="id"
+			referencedTableName="bank" />
+	</changeSet>
+
+	<!-- Change set for table employee -->
+	<changeSet author="pramod" id="employee.1">
+
+		<createTable tableName="employee">
+
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+
 			<column name="name" type="VARCHAR(255)" />
 			<column name="type" type="VARCHAR(255)" />
 			<column name="salary" type="DOUBLE" />
-			
-		</createTable>
-	</changeSet>
-	
-	<!--ChangeSet for the table "Account" -->
-	<changeSet author="sachin" id="1"> 
-	
-		<createTable tableName="Account">
-			
-			<column autoIncrement="true" name="id" type="INT">
-				<constraints primaryKey="true" />
-			</column>
-			
-			<column name="accountno" type="LONG" />
-			<column name="balance" type="DOUBLE" />
-			<column name="overdraft" type="DOUBLE" />
-			
-		</createTable>
-	</changeSet>
-	
-	<!--ChangeSet for the table "AccountType" -->
-	<changeSet author="sachin" id="2"> 
-	
-		<createTable tableName="AccountType">
-			
-			<column autoIncrement="true" name="id" type="INT">
-				<constraints primaryKey="true" />
-			</column>
-			
-			<column name="transactionlimit" type="DOUBLE" />
-			<column name="depositamt" type="DOUBLE" />
-			<column name="withdrawllimit" type="DOUBLE" />
-			<column name="interestrate" type="DOUBLE" />
-			
-		</createTable>
-	</changeSet>
-	
-<!--  Commit check by Prajwal--> 
 
+			<column name="bank_id" type="int">
+				<constraints nullable="true" />
+			</column>
 
-	
-	
+		</createTable>
+	</changeSet>
+
+	<!-- Foreign key Constraints for Employee Entity -->
+	<changeSet author="pramod" id="employee.2">
+		<addForeignKeyConstraint
+			constraintName="fk_bank_employee_id" baseColumnNames="bank_id"
+			baseTableName="employee" referencedColumnNames="id"
+			referencedTableName="bank" />
+	</changeSet>
+
 	<!--ChangeSet for the table "Shareholders" -->
-	<changeSet author="stephan" id="3"> 
-	
+	<changeSet author="pramod" id="shareholders.1">
+
 		<createTable tableName="shareholders">
-			
+
 			<column autoIncrement="true" name="id" type="INT">
 				<constraints primaryKey="true" />
 			</column>
-			
+
 			<column name="name" type="VARCHAR(255)" />
-			
-			
-		</createTable>
-		<!--ChangeSet for the table "Shares" -->
-	</changeSet>
-	
-		<changeSet author="stephan" id="4"> 
-	
-		<createTable tableName="shares">
-			<column autoIncrement="true" name="id" type="INT">
-				<constraints primaryKey="true" />
+			<column name="bank_id" type="int">
+				<constraints nullable="true" />
 			</column>
-			
-			
-			<column name="number" type="DOUBLE" />
-			<column name="value" type="DOUBLE" />
-			<column name="type" type="VARCHAR(255)" />
-			<column name="equity" type="DOUBLE" />
-			<column name="preferrential" type="VARCHAR(255)"/>
-			
-		</createTable>
-	</changeSet>
-	
-	<!--ChangeSet for the table "Card" -->
 
-		<changeSet author="stephan" id="5"> 
-	
-		<createTable tableName="card">
-			<column autoIncrement="true" name="id" type="INT">
-				<constraints primaryKey="true" />
-			</column>
-			
-			
-			<column name="accountno" type="LONG" />
-			<column name="cardno" type="LONG" />
-			<column name="validfrom" type="VARCHAR(255)" />
-			<column name="validto" type="VARCHAR(255)" />
-			
-			
 		</createTable>
 	</changeSet>
 
-		<changeSet author="sandeep" id="7"> 
-	
-		<createTable tableName="loan">
-			<column autoIncrement="true" name="id" type="INT">
-				<constraints primaryKey="true" />
-			</column>
-			
-			
-			<column name="accountno" type="LONG" />
-			<column name="amount" type="Double" />
-			<column name="loanType" type="VARCHAR(255)" />
-			<column name="rateOfInterest" type="Double" />
-			<column name="term" type="VARCHAR(255)" />
-			
-		</createTable>
+	<!-- Foreign key Constraints for Employee Entity -->
+	<changeSet author="pramod" id="shareholders.2">
+		<addForeignKeyConstraint
+			constraintName="fk_bank_shareholders_id" baseColumnNames="bank_id"
+			baseTableName="shareholders" referencedColumnNames="id"
+			referencedTableName="bank" />
 	</changeSet>
-	
-	<!-- Change set for table bank -->
-	
-	<changeSet id="6" author="Prajwal">
-		<createTable tableName="Bank">
-			<column autoIncrement="true" name="id" type="INT">
-				<constraints primaryKey="true"/>
-			</column>
-			<column name="name" type="VARCHAR(255)"/>
-			<column name="type" type="VARCHAR(255)"/>
-			<column name="head_office" type="VARCHAR(255)"/>
-		</createTable>
-		
-	</changeSet>
-	
-	<!-- Change Set for table Insurance -->
-		
-		<changeSet id="8" author="Prajwal">
-			<createTable tableName="insurance">
-				<column autoIncrement="true" name="id" type="INT">
-					<constraints primaryKey="true"/>
-				</column>
-				
-				<column name="issuing_company" type="VARCHAR(255)"/>
-				<column name="type" type="VARCHAR(255)"/>
-				<column name="premium_payment" type="DOUBLE"/>
-				<column name="term" type="INT"/>
-			</createTable>
-		
-		</changeSet>
-		
-		<changeSet author="sachin" id="9"> 
-	
+
+	<!--ChangeSet for the table "Branch" -->
+	<changeSet author="pramod" id="branch.1">
+
 		<createTable tableName="branch">
-			
+
 			<column autoIncrement="true" name="id" type="INT">
 				<constraints primaryKey="true" />
 			</column>
-			
+
 			<column name="type" type="VARCHAR(255)" />
 			<column name="location" type="VARCHAR(255)" />
-			
+			<column name="bank_id" type="int">
+				<constraints nullable="true" />
+			</column>
+
 		</createTable>
+	</changeSet>
+
+	<!-- Foreign key Constraints for branch Entity -->
+	<changeSet author="pramod" id="branch.2">
+		<addForeignKeyConstraint
+			constraintName="fk_bank_branch_id" baseColumnNames="bank_id"
+			baseTableName="branch" referencedColumnNames="id"
+			referencedTableName="bank" />
 	</changeSet>
 	
 	
-	
-	
+
 </databaseChangeLog>

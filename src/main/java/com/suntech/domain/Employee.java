@@ -3,38 +3,36 @@ package com.suntech.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="employee")
-public class Employee extends IdDomain  {
+@Table(name = "employee")
+public class Employee extends IdDomain {
 
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="type")
+
+	@Column(name = "type")
 	private String type;
-	
-	@Column(name="salary")
+
+	@Column(name = "salary")
 	private Double salary;
 
-	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "employee",orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
 	private Shareholders shareholders;
-	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "employee",orphanRemoval = true)
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
 	private Customer customer;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "bank_id")
 	private Bank bank;
-	
+
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Employee(String name, String type, Double salary) {
@@ -91,8 +89,5 @@ public class Employee extends IdDomain  {
 	public void setBank(Bank bank) {
 		this.bank = bank;
 	}
-	
-	
-	
-	
+
 }

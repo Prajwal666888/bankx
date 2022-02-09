@@ -1,7 +1,10 @@
 package com.suntech.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,11 +22,12 @@ public class Atm extends IdDomain {
 	@Column(name = "amountofcash", nullable = false)
 	private Double amountOfCash;
 
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "bank_id")
+	private Bank bank;
 
 	public Atm() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Atm(String location, Double amountOfCash) {

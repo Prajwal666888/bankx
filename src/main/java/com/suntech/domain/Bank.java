@@ -10,36 +10,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Bank")
+@Table(name = "Bank")
 public class Bank extends IdDomain {
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="type")
+
+	@Column(name = "type")
 	private String type;
-	
-	@Column(name="head_office")
+
+	@Column(name = "head_office")
 	private String head_office;
-	
-	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
-	private List<Atm>atm=new ArrayList<>();
-	
-	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
-	private List<Employee> employees=new ArrayList<>();
-	
-	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
-	private List<Customer> customers=new ArrayList<>();
-	
-	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
-	private List<Shareholders> shareHolders=new ArrayList<>();
-	
-	
-	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "Bank")
-	private List<Branches> branches=new ArrayList<>();
-	
+
+	@OneToMany(targetEntity = Atm.class, cascade = CascadeType.ALL, mappedBy = "bank")
+	private List<Atm> atm = new ArrayList<>();
+
+	@OneToMany(targetEntity = Employee.class, cascade = CascadeType.ALL, mappedBy = "bank")
+	private List<Employee> employees = new ArrayList<>();
+
+	@OneToMany(targetEntity = Customer.class, cascade = CascadeType.ALL, mappedBy = "bank")
+	private List<Customer> customers = new ArrayList<>();
+
+	@OneToMany(targetEntity = Shareholders.class, cascade = CascadeType.ALL, mappedBy = "bank")
+	private List<Shareholders> shareHolders = new ArrayList<>();
+
+	@OneToMany(targetEntity = Branches.class, cascade = CascadeType.ALL, mappedBy = "bank")
+	private List<Branches> branches = new ArrayList<Branches>();
+
 	public Bank() {
-		
+
 	}
 
 	public Bank(String name, String type, String head_office) {
@@ -112,9 +111,5 @@ public class Bank extends IdDomain {
 	public void setBranches(List<Branches> branches) {
 		this.branches = branches;
 	}
-	
-	
-	
-	
-	
+
 }

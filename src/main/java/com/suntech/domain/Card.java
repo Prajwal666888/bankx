@@ -3,6 +3,7 @@ package com.suntech.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,6 +28,7 @@ public class Card extends IdDomain {
 	private String validTo;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "account_id")
 	private Account account;
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -3,6 +3,7 @@ package com.suntech.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,6 +21,7 @@ public class Branches extends IdDomain {
 	private String location;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="bank_id")
 	private Bank bank;
 
 	public Branches() {

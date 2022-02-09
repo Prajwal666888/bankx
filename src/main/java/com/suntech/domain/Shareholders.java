@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -26,13 +26,14 @@ public class Shareholders extends IdDomain {
 	@OneToMany(mappedBy = "shareholders", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Shares> shares = new ArrayList<Shares>();
 
-	@OneToOne(mappedBy = "shareholders", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Employee employee;
 
-	@OneToOne(mappedBy = "shareholders", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "bank_id")
 	private Bank bank;
 
 	public Shareholders() {

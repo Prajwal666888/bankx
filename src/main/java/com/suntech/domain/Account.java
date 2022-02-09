@@ -25,25 +25,17 @@ public class Account extends IdDomain {
 	@Column(name = "overdraft")
 	private Double overdraft;
 
-	public Account() {
-
-	}
-
-	@OneToOne(mappedBy = "Account", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private AccountType accountType;
+	
+	@OneToMany(targetEntity = Card.class, cascade = CascadeType.ALL, mappedBy = "account")
+	private List<Card> cards = new ArrayList<Card>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Customer customer;
 
-	@OneToMany(mappedBy = "Account", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Card> card = new ArrayList<Card>();
+	public Account() {
 
-	public List<Card> getCard() {
-		return card;
-	}
-
-	public void setCard(List<Card> card) {
-		this.card = card;
 	}
 
 	public Account(Long accountno, Double balance, Double overdraft) {
@@ -92,4 +84,13 @@ public class Account extends IdDomain {
 	public void setOverdraft(Double overdraft) {
 		this.overdraft = overdraft;
 	}
+
+	public List<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
+	
 }
