@@ -1,12 +1,15 @@
 package com.suntech.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -44,6 +47,9 @@ public class Customer extends IdDomain {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "insurance_id")
 	private Insurance insurance;
+	
+	@OneToMany(targetEntity = Card.class, cascade = CascadeType.ALL, mappedBy = "customer")
+	private List<Card> cards = new ArrayList<Card>();
 
 	public Customer() {
 		super();
@@ -122,4 +128,12 @@ public class Customer extends IdDomain {
 		this.insurance = insurance;
 	}
 
+	public List<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
+	
 }

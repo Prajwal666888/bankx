@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.CardDao;
-
 import com.suntech.domain.Card;
 
 @DataJpaTest
@@ -51,7 +50,6 @@ public class CardTest {
 
 	public Card createCard() {
 		Card card = new Card();
-		card.setAccountNo(1234567l);
 		card.setCardNo(224544554455l);
 		card.setValidFrom("May2010");
 		card.setValidTo("May2016");
@@ -60,7 +58,6 @@ public class CardTest {
 
 	public Card changeCard(Card card) {
 
-		card.setAccountNo(1111111l);
 		card.setCardNo(222244446666l);
 		card.setValidFrom("May2010");
 		card.setValidTo("May2016");
@@ -69,7 +66,6 @@ public class CardTest {
 	}
 
 	public void validateEquals(Card card, Card updatedCard) {
-		assertEquals(card.getAccountNo(), updatedCard.getAccountNo());
 
 		assertEquals(card.getCardNo(), updatedCard.getCardNo());
 
