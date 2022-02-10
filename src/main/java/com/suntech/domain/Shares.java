@@ -3,6 +3,7 @@ package com.suntech.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,6 +31,7 @@ public class Shares extends IdDomain {
 	private String preferrential;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "shareholders_id")
 	private Shareholders shareholders;
 
 	public Shares() {

@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Account")
+@Table(name = "account")
 public class Account extends IdDomain {
 
 	@Column(name = "accountno")
@@ -27,7 +27,10 @@ public class Account extends IdDomain {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private AccountType accountType;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Loans loans;
+
 	@OneToMany(targetEntity = Card.class, cascade = CascadeType.ALL, mappedBy = "account")
 	private List<Card> cards = new ArrayList<Card>();
 
@@ -38,27 +41,16 @@ public class Account extends IdDomain {
 
 	}
 
-	public Account(Long accountno, Double balance, Double overdraft) {
+	public Account(Long accountno, Double balance, Double overdraft, AccountType accountType, Loans loans,
+			List<Card> cards, Customer customer) {
 		super();
 		this.accountno = accountno;
 		this.balance = balance;
 		this.overdraft = overdraft;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public AccountType getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
+		this.loans = loans;
+		this.cards = cards;
+		this.customer = customer;
 	}
 
 	public Long getAccountno() {
@@ -85,6 +77,22 @@ public class Account extends IdDomain {
 		this.overdraft = overdraft;
 	}
 
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
+	}
+
+	public Loans getLoans() {
+		return loans;
+	}
+
+	public void setLoans(Loans loans) {
+		this.loans = loans;
+	}
+
 	public List<Card> getCards() {
 		return cards;
 	}
@@ -92,5 +100,13 @@ public class Account extends IdDomain {
 	public void setCards(List<Card> cards) {
 		this.cards = cards;
 	}
-	
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 }

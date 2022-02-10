@@ -26,7 +26,7 @@ public class Insurance extends IdDomain {
 	private Integer term;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "insurance")
-	private List<Customer> customers = new ArrayList<>();
+	private List<Customer> customers = new ArrayList<Customer>();
 
 	public Insurance(String issuing_company, String type, Double premium_payment, Integer term) {
 		this.issuing_company = issuing_company;

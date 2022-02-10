@@ -49,7 +49,6 @@ public class LoanTest {
 
 	private Loans createLoan() {
 		Loans loan = new Loans();
-		loan.setAccountNo(123300l);
 		loan.setAmount(120000d);
 
 		loan.setLoanType("home loan");
@@ -60,7 +59,6 @@ public class LoanTest {
 	}
 
 	private Loans changeLoan(Loans loan) {
-		loan.setAccountNo(166664l);
 		loan.setAmount(156600d);
 
 		loan.setLoanType("car loan");
@@ -71,7 +69,6 @@ public class LoanTest {
 	}
 
 	public void validateEquals(Loans loan, Loans updatedLoan) {
-		assertEquals(loan.getAccountNo(), updatedLoan.getAccountNo());
 		assertEquals(loan.getAmount(), updatedLoan.getAmount());
 		assertEquals(loan.getLoanType(), updatedLoan.getLoanType());
 		assertEquals(loan.getRateOfInterest(), updatedLoan.getRateOfInterest());

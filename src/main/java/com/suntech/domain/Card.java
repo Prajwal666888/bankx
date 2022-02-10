@@ -15,9 +15,6 @@ import javax.persistence.Table;
 @Table(name = "card")
 public class Card extends IdDomain {
 
-	@Column(name = "accountno")
-	private Long accountNo;
-
 	@Column(name = "cardno")
 	private Long cardNo;
 
@@ -32,27 +29,18 @@ public class Card extends IdDomain {
 	private Account account;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	public Card() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Card(Long accountNo, Long cardNo, String validFrom, String validTo) {
+	public Card(Long cardNo, String validFrom, String validTo) {
 		super();
-		this.accountNo = accountNo;
 		this.cardNo = cardNo;
 		this.validFrom = validFrom;
 		this.validTo = validTo;
-	}
-
-	public Long getAccountNo() {
-		return accountNo;
-	}
-
-	public void setAccountNo(Long accountNo) {
-		this.accountNo = accountNo;
 	}
 
 	public Long getCardNo() {
