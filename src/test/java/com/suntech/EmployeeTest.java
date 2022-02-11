@@ -12,27 +12,32 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.EmployeeDao;
 import com.suntech.domain.Employee;
+import com.suntech.utils.EmployeeUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class EmployeeTest {
 
 	@Autowired
 	private EmployeeDao employeeDao;
-	
+
 	@Test
 	public void testEmployee() {
-		
-		Employee createEmployee = createEmployee();
+
+		Employee createEmployee = EmployeeUtils.createEmployee();
 		try {
 			Employee insertedEmployee = employeeDao.save(createEmployee);
 			System.out.println("Data saved");
 			// validaing created atm inserted atm.
 			validateEquals(createEmployee, insertedEmployee);
-			
-			Employee changeEmployee = changeEmployee(insertedEmployee);
+
+			Employee changeEmployee = EmployeeUtils.changeEmployee(insertedEmployee);
 			// validating after updting the data
-			Employee updatedEmployee= employeeDao.save(createEmployee);
+			Employee updatedEmployee = employeeDao.save(createEmployee);
 			System.out.println("Data updated");
 			validateEquals(changeEmployee, updatedEmployee);
 		} catch (Exception e) {
@@ -48,29 +53,11 @@ public class EmployeeTest {
 
 	}
 
-	public Employee createEmployee() {
-		Employee employee = new Employee();
-		employee.setName("abc");
-		employee.setType("sd");
-		employee.setSalary(25000.00);
-		return employee;
-	}
-
-	public Employee changeEmployee (Employee employee) {
-		employee.setName("bcd");
-		employee.setType("test");
-		employee.setSalary(25000.00);
-		
-		return employee;
-	}
-
-	public void validateEquals(Employee employee, Employee updatedEmployee ){
+	public void validateEquals(Employee employee, Employee updatedEmployee) {
 		assertEquals(employee.getName(), updatedEmployee.getName());
 		assertEquals(employee.getType(), updatedEmployee.getType());
 		assertEquals(employee.getSalary(), updatedEmployee.getSalary());
-		
-	}
-
-
 
 	}
+
+}

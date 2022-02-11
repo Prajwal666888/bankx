@@ -12,7 +12,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.BranchDao;
 import com.suntech.domain.Branches;
+import com.suntech.utils.BranchUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class BranchTest {
@@ -22,7 +27,7 @@ public class BranchTest {
 
 	@Test
 	public void testBranch() {
-		Branches createBranch = createBranch();
+		Branches createBranch = BranchUtils.createBranch();
 
 		try {
 
@@ -31,7 +36,7 @@ public class BranchTest {
 			// validating created atm inserted atm.
 			validateEquals(createBranch, insertedBranch);
 
-			Branches changeBranch = changeBranch(insertedBranch);
+			Branches changeBranch = BranchUtils.changeBranch(insertedBranch);
 			// validating after updting the data
 			Branches updatedBranch = branchDao.save(createBranch);
 			System.out.println("Data updated");
@@ -47,19 +52,6 @@ public class BranchTest {
 
 		}
 
-	}
-
-	public Branches createBranch() {
-		Branches branch = new Branches();
-		branch.setType("Local");
-		branch.setLocation("Davangere");
-		return branch;
-	}
-
-	public Branches changeBranch(Branches branch) {
-		branch.setType("LCorporate");
-		branch.setLocation("Harihar");
-		return branch;
 	}
 
 	public void validateEquals(Branches Branch, Branches updatedBranch) {

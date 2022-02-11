@@ -11,10 +11,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.AccountTypeDao;
-import com.suntech.dao.AccountTypeDao;
 import com.suntech.domain.AccountType;
-import com.suntech.domain.Atm;
+import com.suntech.utils.AccountTypeUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class AccountTypeTest {
@@ -24,7 +27,7 @@ public class AccountTypeTest {
 
 	@Test
 	public void testAccountType() {
-		AccountType createAccountType = createAccountType();
+		AccountType createAccountType = AccountTypeUtils.createAccountType();
 
 		try {
 
@@ -33,7 +36,7 @@ public class AccountTypeTest {
 			// validating created atm inserted atm.
 			validateEquals(createAccountType, insertedAccountType);
 
-			AccountType changeAccountType = changeAccountType(insertedAccountType);
+			AccountType changeAccountType = AccountTypeUtils.changeAccountType(insertedAccountType);
 			// validating after updting the data
 			AccountType updatedAccountType = accountTypeDao.save(createAccountType);
 			System.out.println("Data updated");
@@ -49,23 +52,6 @@ public class AccountTypeTest {
 
 		}
 
-	}
-
-	public AccountType createAccountType() {
-		AccountType accountType = new AccountType();
-		accountType.setTransactionlimit(5000.00);
-		accountType.setDepositamt(4000.00);
-		accountType.setWithdrawllimit(6000.00);
-		accountType.setInterestrate(25.00);
-		return accountType;
-	}
-
-	public AccountType changeAccountType(AccountType accountType) {
-		accountType.setTransactionlimit(5100.00);
-		accountType.setDepositamt(4100.00);
-		accountType.setWithdrawllimit(6100.00);
-		accountType.setInterestrate(26.00);
-		return accountType;
 	}
 
 	public void validateEquals(AccountType AccountType, AccountType updatedAccountType) {
