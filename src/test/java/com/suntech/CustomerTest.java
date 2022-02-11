@@ -12,8 +12,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.CustomerDao;
 import com.suntech.domain.Customer;
-import com.suntech.utils.DateTimeUtils;
+import com.suntech.utils.CustomerUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class CustomerTest {
@@ -23,15 +27,15 @@ public class CustomerTest {
 
 	@Test
 	public void testCustomer() {
-		Customer createCustomer = createCustomer();
-		
+		Customer createCustomer = CustomerUtils.createCustomer();
+
 		try {
 			Customer insertedCustomer = customerDao.save(createCustomer);
 			System.out.println("Data saved");
 			// validating created Customer inserted Customer.
 			validateEquals(createCustomer, insertedCustomer);
 
-			Customer changeCustomer = changeCustomer(insertedCustomer);
+			Customer changeCustomer = CustomerUtils.changeCustomer(insertedCustomer);
 			// validating after updating the data
 			Customer updatedCustomer = customerDao.save(createCustomer);
 			System.out.println("Data updated");
@@ -47,27 +51,10 @@ public class CustomerTest {
 		}
 	}
 
-	public Customer createCustomer() {
-		Customer customer = new Customer();
-		customer.setName("James");
-		customer.setAccountNo(1212121212l);
-		customer.setPanNo("HS10JB33");
-		customer.setDob(DateTimeUtils.getDateIn("dd-mm-yyyy", "20-01-1996"));
-		return customer;
-	}
-
-	public Customer changeCustomer(Customer customer) {
-		customer.setName("Scott");
-		customer.setAccountNo(132132132l);
-		customer.setPanNo("PSO3033");
-		customer.setDob(DateTimeUtils.getDateIn("dd-mm-yyyy", "20-01-1989"));
-		return customer;
-	}
-
 	public void validateEquals(Customer customer, Customer updatedCustomer) {
-		assertEquals(customer.getName(),updatedCustomer.getName());
-		assertEquals(customer.getAccountNo(),updatedCustomer.getAccountNo());
-		assertEquals(customer.getPanNo(),updatedCustomer.getPanNo());
-		assertEquals(customer.getDob(),updatedCustomer.getDob());
+		assertEquals(customer.getName(), updatedCustomer.getName());
+		assertEquals(customer.getAccountNo(), updatedCustomer.getAccountNo());
+		assertEquals(customer.getPanNo(), updatedCustomer.getPanNo());
+		assertEquals(customer.getDob(), updatedCustomer.getDob());
 	}
 }

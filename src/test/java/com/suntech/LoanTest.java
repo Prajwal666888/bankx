@@ -12,7 +12,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.LoanDao;
 import com.suntech.domain.Loans;
+import com.suntech.utils.LoanUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class LoanTest {
@@ -22,14 +27,14 @@ public class LoanTest {
 
 	@Test
 	public void testLoan() {
-		Loans createLoan = createLoan();
+		Loans createLoan = LoanUtils.createLoan();
 		try {
 			Loans insertedLoan = loanDao.save(createLoan);
 			System.out.println("Data saved");
 			// validaing created loans inserted loan.
 			validateEquals(createLoan, insertedLoan);
 
-			Loans changeLoan = changeLoan(insertedLoan);
+			Loans changeLoan = LoanUtils.changeLoan(insertedLoan);
 			// validating after updting the data
 			Loans updatedLoan = loanDao.save(createLoan);
 			System.out.println("Data updated");
@@ -47,26 +52,7 @@ public class LoanTest {
 
 	}
 
-	private Loans createLoan() {
-		Loans loan = new Loans();
-		loan.setAmount(120000d);
-
-		loan.setLoanType("home loan");
-		loan.setRateOfInterest(5d);
-		loan.setTerm("short");
-
-		return loan;
-	}
-
-	private Loans changeLoan(Loans loan) {
-		loan.setAmount(156600d);
-
-		loan.setLoanType("car loan");
-		loan.setRateOfInterest(10d);
-		loan.setTerm("long");
-
-		return loan;
-	}
+	
 
 	public void validateEquals(Loans loan, Loans updatedLoan) {
 		assertEquals(loan.getAmount(), updatedLoan.getAmount());

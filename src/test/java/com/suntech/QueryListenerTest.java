@@ -7,6 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.suntech.controller.CustomerQueries;
 
 
+/**
+ * @author Sachin
+ *
+ */
 @SpringBootTest
 public class QueryListenerTest {
 
