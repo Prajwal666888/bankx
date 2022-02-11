@@ -11,10 +11,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.AccountDao;
-import com.suntech.dao.AccountDao;
 import com.suntech.domain.Account;
-import com.suntech.domain.Atm;
+import com.suntech.utils.AccountUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class AccountTest {
@@ -24,7 +27,7 @@ public class AccountTest {
 
 	@Test
 	public void testAccount() {
-		Account createAccount = createAccount();
+		Account createAccount = AccountUtils.createAccount();
 
 		try {
 
@@ -33,7 +36,7 @@ public class AccountTest {
 			// validating created atm inserted atm.
 			validateEquals(createAccount, insertedAccount);
 
-			Account changeAccount = changeAccount(insertedAccount);
+			Account changeAccount = AccountUtils.changeAccount(insertedAccount);
 			// validating after updting the data
 			Account updatedAccount = accountDao.save(createAccount);
 			System.out.println("Data updated");
@@ -49,21 +52,6 @@ public class AccountTest {
 
 		}
 
-	}
-
-	public Account createAccount() {
-		Account account = new Account();
-		account.setAccountno((long) 412564888);
-		account.setBalance(10000.00);
-		account.setOverdraft(100.00);
-		return account;
-	}
-
-	public Account changeAccount(Account account) {
-		account.setAccountno((long) 412564777);
-		account.setBalance(11000.00);
-		account.setOverdraft(110.00);
-		return account;
 	}
 
 	public void validateEquals(Account account, Account updatedAccount) {

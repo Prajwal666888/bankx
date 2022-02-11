@@ -12,7 +12,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.AtmDao;
 import com.suntech.domain.Atm;
+import com.suntech.utils.AtmUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class AtmTest {
@@ -22,14 +27,14 @@ public class AtmTest {
 
 	@Test
 	public void testAtm() {
-		Atm createAtm = createAtm();
+		Atm createAtm = AtmUtils.createAtm();
 		try {
 			Atm insertedAtm = atmDao.save(createAtm);
 			System.out.println("Data saved");
 			// validaing created atm inserted atm.
 			validateEquals(createAtm, insertedAtm);
 
-			Atm changeAtm = changeAtm(insertedAtm);
+			Atm changeAtm = AtmUtils.changeAtm(insertedAtm);
 			// validating after updting the data
 			Atm updatedAtm = atmDao.save(createAtm);
 			System.out.println("Data updated");
@@ -45,19 +50,6 @@ public class AtmTest {
 
 		}
 
-	}
-
-	public Atm createAtm() {
-		Atm atm = new Atm();
-		atm.setLocation("banglore");
-		atm.setAmountOfCash(111d);
-		return atm;
-	}
-
-	public Atm changeAtm(Atm atm) {
-		atm.setLocation("Manglore");
-		atm.setAmountOfCash(222d);
-		return atm;
 	}
 
 	public void validateEquals(Atm atm, Atm updatedAtm) {

@@ -12,25 +12,30 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.ShareholdersDao;
 import com.suntech.domain.Shareholders;
+import com.suntech.utils.ShareholdersUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class ShareholdersTest {
-	
+
 	@Autowired
 	private ShareholdersDao shareholdersDao;
-	
+
 	@Test
 	public void testShareholders() {
-		
-		Shareholders createShareholders = createShareholders();
+
+		Shareholders createShareholders = ShareholdersUtils.createShareholders();
 		try {
 			Shareholders insertedShareholders = shareholdersDao.save(createShareholders);
 			System.out.println("Data saved");
 			// validaing created atm inserted atm.
 			validateEquals(createShareholders, insertedShareholders);
 
-			Shareholders changeShareholders = changeShareholders(insertedShareholders);
+			Shareholders changeShareholders = ShareholdersUtils.changeShareholders(insertedShareholders);
 			// validating after updting the data
 			Shareholders updatedShareholders = shareholdersDao.save(createShareholders);
 			System.out.println("Data updated");
@@ -48,26 +53,9 @@ public class ShareholdersTest {
 
 	}
 
-	public Shareholders createShareholders() {
-		Shareholders shareholders = new Shareholders();
-		shareholders.setName("XYZ");
-		
-		return shareholders;
-	}
-
-	public Shareholders changeShareholders(Shareholders shareholders) {
-		
-		shareholders.setName("ZZZ");
-		
-		
-		return shareholders;
-	}
-
 	public void validateEquals(Shareholders shareholders, Shareholders updatedShareholders) {
-		assertEquals(shareholders.getName(),updatedShareholders.getName());
-		
-		
-		
+		assertEquals(shareholders.getName(), updatedShareholders.getName());
+
 	}
 
 }

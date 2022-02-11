@@ -12,7 +12,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.SharesDao;
 import com.suntech.domain.Shares;
+import com.suntech.utils.SharesUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class SharesTest {
@@ -23,14 +28,14 @@ public class SharesTest {
 	@Test
 	public void testShares() {
 
-		Shares createShares = createShares();
+		Shares createShares = SharesUtils.createShares();
 		try {
 			Shares insertedShares = sharesDao.save(createShares);
 			System.out.println("Data saved");
 			// validaing created atm inserted atm.
 			validateEquals(createShares, insertedShares);
 
-			Shares changeShares = changeShares(insertedShares);
+			Shares changeShares = SharesUtils.changeShares(insertedShares);
 			// validating after updting the data
 			Shares updatedShares = sharesDao.save(createShares);
 			System.out.println("Data updated");
@@ -46,29 +51,6 @@ public class SharesTest {
 
 		}
 
-	}
-
-	public Shares createShares() {
-		Shares shares = new Shares();
-
-		shares.setNumber(1234567d);
-		shares.setValue(20000d);
-		shares.setType("Ordinary share");
-		shares.setEquity(1d);
-		shares.setPreferrential("Cumulative preference shares");
-
-		return shares;
-	}
-
-	public Shares changeShares(Shares shares) {
-
-		shares.setNumber(1112246d);
-		shares.setValue(40000d);
-		shares.setType("Preference shares");
-		shares.setEquity(2d);
-		shares.setPreferrential("Redeemable preference shares");
-
-		return shares;
 	}
 
 	public void validateEquals(Shares shares, Shares updatedShares) {

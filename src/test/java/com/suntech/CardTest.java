@@ -11,9 +11,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.suntech.dao.CardDao;
-
 import com.suntech.domain.Card;
+import com.suntech.utils.CardUtils;
 
+/**
+ * @author Sachin
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class CardTest {
@@ -24,14 +28,14 @@ public class CardTest {
 	@Test
 	public void testCard() {
 
-		Card createCard = createCard();
+		Card createCard = CardUtils.createCard();
 		try {
 			Card insertedCard = cardDao.save(createCard);
 			System.out.println("Data saved");
 			// validaing created atm inserted atm.
 			validateEquals(createCard, insertedCard);
 
-			Card changeCard = changeCard(insertedCard);
+			Card changeCard = CardUtils.changeCard(insertedCard);
 			// validating after updting the data
 			Card updatedCard = cardDao.save(createCard);
 			System.out.println("Data updated");
@@ -49,27 +53,7 @@ public class CardTest {
 
 	}
 
-	public Card createCard() {
-		Card card = new Card();
-		card.setAccountNo(1234567l);
-		card.setCardNo(224544554455l);
-		card.setValidFrom("May2010");
-		card.setValidTo("May2016");
-		return card;
-	}
-
-	public Card changeCard(Card card) {
-
-		card.setAccountNo(1111111l);
-		card.setCardNo(222244446666l);
-		card.setValidFrom("May2010");
-		card.setValidTo("May2016");
-
-		return card;
-	}
-
 	public void validateEquals(Card card, Card updatedCard) {
-		assertEquals(card.getAccountNo(), updatedCard.getAccountNo());
 
 		assertEquals(card.getCardNo(), updatedCard.getCardNo());
 

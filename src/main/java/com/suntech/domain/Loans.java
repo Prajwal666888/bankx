@@ -1,44 +1,47 @@
 package com.suntech.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 /**
  * @author sandeep
  *
  */
 @Entity
-@Table(name="loan")
+@Table(name = "loan")
 public class Loans extends IdDomain {
-	
-	@Column(name="amount")
+
+	@Column(name = "amount")
 	private Double amount;
-	
-	@Column(name="loan_type")
+
+	@Column(name = "loan_type")
 	private String loanType;
-	
-	@Column(name="rate_of_interest")
+
+	@Column(name = "rate_of_interest")
 	private Double rateOfInterest;
-	
-	@Column(name="term")
-	private String term; 
-	
-	@Column(name="accountno")
-	private Long accountNo;
+
+	@Column(name = "term")
+	private String term;
+
+	@OneToOne(mappedBy = "accountType", cascade = CascadeType.ALL)
+	@JoinColumn(name = "account_id", referencedColumnName = "id")
+	private Account account;
 
 	public Loans() {
-		
+
 	}
 
-	public Loans(Double amount, String loanType, Double rateOfInterest, String term, Long accountNo) {
+	public Loans(Double amount, String loanType, Double rateOfInterest, String term, Account account) {
 		super();
 		this.amount = amount;
 		this.loanType = loanType;
 		this.rateOfInterest = rateOfInterest;
 		this.term = term;
-		this.accountNo = accountNo;
+		this.account = account;
 	}
 
 	public Double getAmount() {
@@ -73,16 +76,12 @@ public class Loans extends IdDomain {
 		this.term = term;
 	}
 
-	public Long getAccountNo() {
-		return accountNo;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setAccountNo(Long accountNo) {
-		this.accountNo = accountNo;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
-
-	
-	
-	
 
 }

@@ -99,7 +99,7 @@
 			referencedTableName="bank" />
 	</changeSet>
 
-	<!--ChangeSet for the table "Branch" -->
+	<!--ChangeSet for the table "branch" -->
 	<changeSet author="pramod" id="branch.1">
 
 		<createTable tableName="branch">
@@ -124,7 +124,199 @@
 			baseTableName="branch" referencedColumnNames="id"
 			referencedTableName="bank" />
 	</changeSet>
-	
-	
+
+	<!--ChangeSet for the table "account" -->
+	<changeSet author="pramod" id="account.1">
+
+		<createTable tableName="account">
+
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="accountno" type="LONG" />
+			<column name="balance" type="DOUBLE" />
+			<column name="overdraft" type="DOUBLE" />
+
+		</createTable>
+	</changeSet>
+
+	<!-- Change Set for table insurance -->
+
+	<changeSet author="pramod" id="insurance.1">
+		<createTable tableName="insurance">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="issuing_company" type="VARCHAR(255)" />
+			<column name="type" type="VARCHAR(255)" />
+			<column name="premium_payment" type="DOUBLE" />
+			<column name="term" type="INT" />
+		</createTable>
+
+	</changeSet>
+
+	<!--ChangeSet for the table "customer" -->
+	<changeSet author="pramod" id="customer.1">
+
+		<createTable tableName="customer">
+
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(255)" />
+			<column name="dob" type="date" />
+			<column name="address" type="VARCHAR(255)" />
+			<column name="accountno" type="LONG" />
+			<column name="balance" type="DOUBLE" />
+			<column name="overdraft" type="DOUBLE" />
+
+			<column name="bank_id" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="insurance_id" type="int">
+				<constraints nullable="true" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<!-- Foreign key Constraints for customer Entity -->
+	<changeSet author="pramod" id="customer.2">
+		<addForeignKeyConstraint
+			constraintName="fk_bank_customer_id" baseColumnNames="bank_id"
+			baseTableName="customer" referencedColumnNames="id"
+			referencedTableName="bank" />
+	</changeSet>
+
+	<changeSet author="pramod" id="customer.3">
+		<addForeignKeyConstraint
+			constraintName="fk_insurance_customer_id"
+			baseColumnNames="insurance_id" baseTableName="customer"
+			referencedColumnNames="id" referencedTableName="insurance" />
+	</changeSet>
+
+	<!--ChangeSet for the table "Card" -->
+
+	<changeSet author="pramod" id="card.1">
+
+		<createTable tableName="card">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="cardno" type="LONG" />
+			<column name="validfrom" type="VARCHAR(255)" />
+			<column name="validto" type="VARCHAR(255)" />
+
+			<column name="account_id" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="customer_id" type="int">
+				<constraints nullable="true" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<!-- Foreign key Constraints for customer Entity -->
+	<changeSet author="pramod" id="card.2">
+		<addForeignKeyConstraint
+			constraintName="fk_card_account_id" baseColumnNames="account_id"
+			baseTableName="card" referencedColumnNames="id"
+			referencedTableName="account" />
+	</changeSet>
+
+	<changeSet author="pramod" id="card.3">
+		<addForeignKeyConstraint
+			constraintName="fk_card_customer_id" baseColumnNames="customer_id"
+			baseTableName="card" referencedColumnNames="id"
+			referencedTableName="customer" />
+	</changeSet>
+
+	<!--ChangeSet for the table loan -->
+
+	<changeSet author="pramod" id="loan.1">
+		<createTable tableName="loan">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+
+
+			<column name="amount" type="Double" />
+			<column name="loanType" type="VARCHAR(255)" />
+			<column name="rateOfInterest" type="Double" />
+			<column name="term" type="VARCHAR(255)" />
+
+			<column name="account_id" type="int">
+				<constraints nullable="true" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<!-- Foreign key Constraints for customer Entity -->
+	<changeSet author="pramod" id="loan.2">
+		<addForeignKeyConstraint
+			constraintName="fk_loan_account_id" baseColumnNames="account_id"
+			baseTableName="loan" referencedColumnNames="id"
+			referencedTableName="account" />
+	</changeSet>
+
+	<!--ChangeSet for the table "Shareholders" -->
+	<changeSet author="pramod" id="shareholders.1">
+
+		<createTable tableName="shareholders">
+
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="name" type="VARCHAR(255)" />
+
+			<column name="bank_id" type="int">
+				<constraints nullable="true" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<!-- Foreign key Constraints for customer Entity -->
+	<changeSet author="pramod" id="shareholders.2">
+		<addForeignKeyConstraint
+			constraintName="fk_bank_shareholders_id" baseColumnNames="bank_id"
+			baseTableName="shareholders" referencedColumnNames="id"
+			referencedTableName="bank" />
+	</changeSet>
+
+	<!--ChangeSet for the table shares -->
+	<changeSet author="pramod" id="shares.1">
+
+		<createTable tableName="shares">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="number" type="DOUBLE" />
+			<column name="value" type="DOUBLE" />
+			<column name="type" type="VARCHAR(255)" />
+			<column name="equity" type="DOUBLE" />
+			<column name="preferrential" type="VARCHAR(255)" />
+
+			<column name="shareholders_id" type="int">
+				<constraints nullable="true" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<!-- Foreign key Constraints for customer Entity -->
+	<changeSet author="pramod" id="shares.2">
+		<addForeignKeyConstraint
+			constraintName="fk_bank_shares_id" baseColumnNames="shareholders_id"
+			baseTableName="shares" referencedColumnNames="id"
+			referencedTableName="shareholders" />
+	</changeSet>
 
 </databaseChangeLog>
