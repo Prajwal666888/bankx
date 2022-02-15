@@ -55,9 +55,9 @@ public class AccountTypeTest {
 	}
 
 	public void validateEquals(AccountType AccountType, AccountType updatedAccountType) {
-		assertEquals(AccountType.getTransactionlimit(), updatedAccountType.getTransactionlimit());
-		assertEquals(AccountType.getDepositamt(), updatedAccountType.getDepositamt());
-		assertEquals(AccountType.getWithdrawllimit(), updatedAccountType.getWithdrawllimit());
-		assertEquals(AccountType.getInterestrate(), updatedAccountType.getInterestrate());
+		assertEquals(AccountType.getTransactionLimit(), updatedAccountType.getTransactionLimit());
+		assertEquals(AccountType.getDepositAmount(), updatedAccountType.getDepositAmount());
+		assertEquals(AccountType.getWithdrawlLimit(), updatedAccountType.getWithdrawlLimit());
+		assertEquals(AccountType.getInterestRate(), updatedAccountType.getInterestRate());
 	}
 }
