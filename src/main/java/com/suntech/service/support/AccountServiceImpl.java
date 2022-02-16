@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
 			List<Account> accounts = accountDao.findAll();
 			
 			for(Account ac:accounts) {
-				if(ac.getAccountno()==account.getAccountno()) {
+				if(ac.getaccountNo()==account.getaccountNo()) {
 					continue;
 				}
 			}
