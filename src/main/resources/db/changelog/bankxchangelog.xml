@@ -430,7 +430,7 @@
 	<!-- droping overdraft column from customer table -->
 	<changeSet author="sachin" id="customer.7">
 		<dropColumn columnName="overdraft"
-			schemaName="liquibasepractice" tableName="customer">
+			tableName="customer">
 			<column name="overdraft" />
 		</dropColumn>
 	</changeSet>
