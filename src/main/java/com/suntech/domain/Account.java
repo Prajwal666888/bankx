@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,16 +26,19 @@ public class Account extends IdDomain {
 	@Column(name = "overdraft")
 	private Double overDraft;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade =  CascadeType.ALL)
+	@JoinColumn(name = "account_type_id")
 	private AccountType accountType;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="loans_id")
 	private Loans loans;
 
 	@OneToMany(targetEntity = Card.class, cascade = CascadeType.ALL, mappedBy = "account")
 	private List<Card> cards = new ArrayList<Card>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	public Account() {
@@ -109,4 +113,5 @@ public class Account extends IdDomain {
 		this.customer = customer;
 	}
 
+	
 }
