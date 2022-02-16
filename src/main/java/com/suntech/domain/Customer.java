@@ -42,16 +42,16 @@ public class Customer extends IdDomain {
 	private Bank bank;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="employee_id")
+	@JoinColumn(name = "employee_id")
 	private Employee employee;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "insurance_id")
 	private Insurance insurance;
-	
-	@OneToMany(cascade =  CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Account> accounts = new ArrayList<Account>();
-	
+
 	public List<Account> getAccounts() {
 		return accounts;
 	}
@@ -67,13 +67,19 @@ public class Customer extends IdDomain {
 		super();
 	}
 
-	public Customer(String name, Date dob, String address, Long accountNo, String panNo) {
+	public Customer(String name, Date dob, String address, Long accountNo, String panNo, Bank bank, Employee employee,
+			Insurance insurance, List<Account> accounts, List<Card> cards) {
 		super();
 		this.name = name;
 		this.dob = dob;
 		this.address = address;
 		this.accountNo = accountNo;
 		this.panNo = panNo;
+		this.bank = bank;
+		this.employee = employee;
+		this.insurance = insurance;
+		this.accounts = accounts;
+		this.cards = cards;
 	}
 
 	public String getName() {
@@ -147,5 +153,5 @@ public class Customer extends IdDomain {
 	public void setCards(List<Card> cards) {
 		this.cards = cards;
 	}
-	
+
 }

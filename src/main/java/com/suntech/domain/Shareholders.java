@@ -41,9 +41,13 @@ public class Shareholders extends IdDomain {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Shareholders(String name) {
+	public Shareholders(String name, List<Shares> shares, Employee employee, Customer customer, Bank bank) {
 		super();
 		this.name = name;
+		this.shares = shares;
+		this.employee = employee;
+		this.customer = customer;
+		this.bank = bank;
 	}
 
 	public String getName() {

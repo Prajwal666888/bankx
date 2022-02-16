@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.suntech.AccountOpeningModel;
 import com.suntech.domain.Account;
 import com.suntech.domain.AccountType;
 import com.suntech.domain.Bank;
 import com.suntech.domain.Branches;
 import com.suntech.domain.Customer;
 import com.suntech.domain.CustomerQuery;
+import com.suntech.model.AccountOpeningModel;
 import com.suntech.service.AccountService;
 import com.suntech.service.AccountTypeService;
 import com.suntech.service.BankService;

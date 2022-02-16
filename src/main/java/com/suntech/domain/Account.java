@@ -26,12 +26,12 @@ public class Account extends IdDomain {
 	@Column(name = "overdraft")
 	private Double overDraft;
 
-	@OneToOne(cascade =  CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "account_type_id")
 	private AccountType accountType;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="loans_id")
+	@JoinColumn(name = "loans_id")
 	private Loans loans;
 
 	@OneToMany(targetEntity = Card.class, cascade = CascadeType.ALL, mappedBy = "account")
@@ -57,11 +57,11 @@ public class Account extends IdDomain {
 		this.customer = customer;
 	}
 
-	public Long getaccountNo() {
+	public Long getAccountNo() {
 		return accountNo;
 	}
 
-	public void setaccountNo(Long accountNo) {
+	public void setAccountNo(Long accountNo) {
 		this.accountNo = accountNo;
 	}
 
@@ -73,11 +73,11 @@ public class Account extends IdDomain {
 		this.balance = balance;
 	}
 
-	public Double getoverDraft() {
+	public Double getOverDraft() {
 		return overDraft;
 	}
 
-	public void setoverDraft(Double overDraft) {
+	public void setOverDraft(Double overDraft) {
 		this.overDraft = overDraft;
 	}
 
@@ -113,5 +113,4 @@ public class Account extends IdDomain {
 		this.customer = customer;
 	}
 
-	
 }

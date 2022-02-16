@@ -41,11 +41,17 @@ public class Bank extends IdDomain {
 
 	}
 
-	public Bank(String name, String type, String head_office) {
+	public Bank(String name, String type, String head_office, List<Atm> atm, List<Employee> employees,
+			List<Customer> customers, List<Shareholders> shareHolders, List<Branches> branches) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.head_office = head_office;
+		this.atm = atm;
+		this.employees = employees;
+		this.customers = customers;
+		this.shareHolders = shareHolders;
+		this.branches = branches;
 	}
 
 	public String getName() {

@@ -21,30 +21,21 @@ public class AccountType extends IdDomain {
 
 	@Column(name = "interestrate")
 	private Double interestRate;
-	
+
 	@OneToOne(mappedBy = "accountType", cascade = CascadeType.ALL)
 	private Account account;
-	
+
 	public AccountType() {
 
 	}
 
-	public AccountType(Double transactionLimit, Double depositAmount, Double withdrawlLimit, Double interestRate
-			) {
+	public AccountType(Double transactionLimit, Double depositAmount, Double withdrawlLimit, Double interestRate,
+			Account account) {
 		super();
 		this.transactionLimit = transactionLimit;
 		this.depositAmount = depositAmount;
 		this.withdrawlLimit = withdrawlLimit;
 		this.interestRate = interestRate;
-	
-	}
-
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
 		this.account = account;
 	}
 
@@ -76,7 +67,16 @@ public class AccountType extends IdDomain {
 		return interestRate;
 	}
 
-	public void setInterestRate(Double interestrate) {
+	public void setInterestRate(Double interestRate) {
 		this.interestRate = interestRate;
 	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 }
