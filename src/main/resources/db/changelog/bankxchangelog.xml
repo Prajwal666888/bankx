@@ -421,12 +421,17 @@
 				<constraints primaryKey="true" />
 			</column>
 
-
 			<column name="query" type="VARCHAR(255)" />
 			<column name="resolution" type="Boolean" />
-
 
 		</createTable>
 	</changeSet>
 
+	<!-- droping overdraft column from customer table -->
+	<changeSet author="sachin" id="customer.1">
+		<dropColumn columnName="overdraft"
+			schemaName="liquibasepractice" tableName="customer">
+			<column name="overdraft" />
+		</dropColumn>
+	</changeSet>
 </databaseChangeLog>
