@@ -361,7 +361,7 @@
 			baseColumnNames="employee_id" baseTableName="customer"
 			referencedColumnNames="id" referencedTableName="employee" />
 	</changeSet>
-	
+
 	<!-- adding PAN_NO column to Customer -->
 	<changeSet author="sujay" id="customer.6">
 		<addColumn tableName="customer">
@@ -375,7 +375,7 @@
 			<column name="account_type_id" type="int" />
 		</addColumn>
 	</changeSet>
-	
+
 	<!-- Foreign key Constraints for Account -->
 	<changeSet author="sujay" id="account.4">
 		<addForeignKeyConstraint
@@ -383,20 +383,20 @@
 			baseColumnNames="account_type_id" baseTableName="account"
 			referencedColumnNames="id" referencedTableName="account_type" />
 	</changeSet>
-	
+
 	<!-- adding account_type_id column to Account -->
 	<changeSet author="sujay" id="account.5">
 		<addColumn tableName="account">
 			<column name="customer_id" type="int" />
 		</addColumn>
 	</changeSet>
-	
+
 	<!-- Foreign key Constraints for Account -->
 	<changeSet author="sujay" id="account.6">
 		<addForeignKeyConstraint
-			constraintName="fk_account_customer_id"
-			baseColumnNames="customer_id" baseTableName="account"
-			referencedColumnNames="id" referencedTableName="customer" />
+			constraintName="fk_account_customer_id" baseColumnNames="customer_id"
+			baseTableName="account" referencedColumnNames="id"
+			referencedTableName="customer" />
 	</changeSet>
 
 	<!-- adding loans_id column to Account -->
@@ -405,13 +405,28 @@
 			<column name="loans_id" type="int" />
 		</addColumn>
 	</changeSet>
-	
+
 	<!-- Foreign key Constraints for Account -->
 	<changeSet author="sujay" id="account.8">
 		<addForeignKeyConstraint
-			constraintName="fk_account_loans_id"
-			baseColumnNames="loans_id" baseTableName="account"
-			referencedColumnNames="id" referencedTableName="loan" />
+			constraintName="fk_account_loans_id" baseColumnNames="loans_id"
+			baseTableName="account" referencedColumnNames="id"
+			referencedTableName="loan" />
 	</changeSet>
-	
+
+	<!--changeset for table customerquery -->
+	<changeSet author="Stephan" id="Customerquery.1">
+		<createTable tableName="customerquery">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+
+
+			<column name="query" type="VARCHAR(255)" />
+			<column name="resolution" type="Boolean" />
+
+
+		</createTable>
+	</changeSet>
+
 </databaseChangeLog>
