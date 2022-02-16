@@ -6,18 +6,18 @@ public class AccountTypeUtils {
 
 	public static AccountType createAccountType() {
 		AccountType accountType = new AccountType();
-		accountType.setTransactionlimit(5000.00);
-		accountType.setDepositamt(4000.00);
-		accountType.setWithdrawllimit(6000.00);
-		accountType.setInterestrate(25.00);
+		accountType.setTransactionLimit(5000.00);
+		accountType.setDepositAmount(4000.00);
+		accountType.setWithdrawlLimit(6000.00);
+		accountType.setInterestRate(25.00);
 		return accountType;
 	}
 
 	public static AccountType changeAccountType(AccountType accountType) {
-		accountType.setTransactionlimit(5100.00);
-		accountType.setDepositamt(4100.00);
-		accountType.setWithdrawllimit(6100.00);
-		accountType.setInterestrate(26.00);
+		accountType.setTransactionLimit(5000.00);
+		accountType.setDepositAmount(4000.00);
+		accountType.setWithdrawlLimit(6000.00);
+		accountType.setInterestRate(25.00);
 		return accountType;
 	}
 }
