@@ -31,10 +31,10 @@ public class Customer extends IdDomain {
 	@Column(name = "address")
 	private String address;
 
-	@Column(name = "accountNo", nullable = false)
+	@Column(name = "accountno", nullable = false)
 	private Long accountNo;
 
-	@Column(name = "panNo", nullable = false)
+	@Column(name = "panno", nullable = false)
 	private String panNo;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -42,12 +42,24 @@ public class Customer extends IdDomain {
 	private Bank bank;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="employee_id")
 	private Employee employee;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "insurance_id")
 	private Insurance insurance;
 	
+	@OneToMany(cascade =  CascadeType.ALL)
+	private List<Account> accounts = new ArrayList<Account>();
+	
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
+	}
+
 	@OneToMany(targetEntity = Card.class, cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Card> cards = new ArrayList<Card>();
 

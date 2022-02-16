@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -17,48 +18,51 @@ import javax.persistence.Table;
 public class Account extends IdDomain {
 
 	@Column(name = "accountno")
-	private Long accountno;
+	private Long accountNo;
 
 	@Column(name = "balance")
 	private Double balance;
 
 	@Column(name = "overdraft")
-	private Double overdraft;
+	private Double overDraft;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade =  CascadeType.ALL)
+	@JoinColumn(name = "account_type_id")
 	private AccountType accountType;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="loans_id")
 	private Loans loans;
 
 	@OneToMany(targetEntity = Card.class, cascade = CascadeType.ALL, mappedBy = "account")
 	private List<Card> cards = new ArrayList<Card>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	public Account() {
 
 	}
 
-	public Account(Long accountno, Double balance, Double overdraft, AccountType accountType, Loans loans,
+	public Account(Long accountNo, Double balance, Double overDraft, AccountType accountType, Loans loans,
 			List<Card> cards, Customer customer) {
 		super();
-		this.accountno = accountno;
+		this.accountNo = accountNo;
 		this.balance = balance;
-		this.overdraft = overdraft;
+		this.overDraft = overDraft;
 		this.accountType = accountType;
 		this.loans = loans;
 		this.cards = cards;
 		this.customer = customer;
 	}
 
-	public Long getAccountno() {
-		return accountno;
+	public Long getaccountNo() {
+		return accountNo;
 	}
 
-	public void setAccountno(Long accountno) {
-		this.accountno = accountno;
+	public void setaccountNo(Long accountNo) {
+		this.accountNo = accountNo;
 	}
 
 	public Double getBalance() {
@@ -69,12 +73,12 @@ public class Account extends IdDomain {
 		this.balance = balance;
 	}
 
-	public Double getOverdraft() {
-		return overdraft;
+	public Double getoverDraft() {
+		return overDraft;
 	}
 
-	public void setOverdraft(Double overdraft) {
-		this.overdraft = overdraft;
+	public void setoverDraft(Double overDraft) {
+		this.overDraft = overDraft;
 	}
 
 	public AccountType getAccountType() {
@@ -109,4 +113,5 @@ public class Account extends IdDomain {
 		this.customer = customer;
 	}
 
+	
 }

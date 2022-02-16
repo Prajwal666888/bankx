@@ -11,9 +11,6 @@ import javax.persistence.Table;
 @Table(name = "Branch")
 public class Branches extends IdDomain {
 
-	@Column(name = "id")
-	private Integer id;
-
 	@Column(name = "type")
 	private String type;
 
@@ -21,7 +18,7 @@ public class Branches extends IdDomain {
 	private String location;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="bank_id")
+	@JoinColumn(name = "bank_id")
 	private Bank bank;
 
 	public Branches() {
@@ -31,7 +28,7 @@ public class Branches extends IdDomain {
 	public Branches(String type, String location) {
 		this.type = type;
 		this.location = location;
-		
+
 	}
 
 	public Bank getBank() {
@@ -40,14 +37,6 @@ public class Branches extends IdDomain {
 
 	public void setBank(Bank bank) {
 		this.bank = bank;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getType() {
