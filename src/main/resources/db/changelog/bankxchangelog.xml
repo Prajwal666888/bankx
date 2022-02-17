@@ -429,9 +429,17 @@
 
 	<!-- droping overdraft column from customer table -->
 	<changeSet author="sachin" id="customer.7">
-		<dropColumn columnName="overdraft"
-			tableName="customer">
+		<dropColumn columnName="overdraft" tableName="customer">
 			<column name="overdraft" />
 		</dropColumn>
+	</changeSet>
+
+	<!--adding email column to customer -->
+	<changeSet author="sachin" id="customer.11">
+		<addColumn tableName="customer">
+			<column name="email" type="varchar(255)" />
+
+
+		</addColumn>
 	</changeSet>
 </databaseChangeLog>
