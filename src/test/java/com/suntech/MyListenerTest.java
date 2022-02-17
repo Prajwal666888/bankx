@@ -22,9 +22,20 @@ public class MyListenerTest {
 			+ "	\"dob\" : \"10-12-2018\",\r\n" + "	\"address\" : \"bengaluru\",\r\n"
 			+ "	\"accountNo\" : \"123456789\",\r\n" + "	\"panNo\" : \"12AB23HH\"\r\n" + "}\r\n" + "}";
 
-	private String customerMessage = "{\\r\\n\" + \"\\\"customerquery\\\":{\\r\\n\" + \"\\\"query\\\":\\\"messagereceived\\\",\\r\\n\"\r\n"
-			+ "			+ \"\\\"resolution\\\" :\\\"true\\\",\\r\\n\" + \"}\\r\\n\" + \"}";
-
+	private String customerMessage = 
+			"{\r\n"
+			+ " 	\"query\": \"messagereceived\",\r\n"
+			+ " 	\"resolution\": true\r\n"
+			+ " }";
+	
+	private String loanMessage ="{\r\n"
+			+ " 	\"amount\": \"20000\",\r\n"
+			+ " 	\"loanType\": \"Home loan\",\r\n"
+			+ " 	\"rateOfInterest\": \"5\",\r\n"
+			+ " 	\"term\": \"short\"\r\n"
+			+ " }";
+	
+	
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
@@ -33,16 +44,22 @@ public class MyListenerTest {
 
 	@Value("${springjms.customerQueue}")
 	private String customerQueue;
+	
+	@Value("${springjms.loanQueue}")
+	private String loanQueue;
 
 	public void send(String message) {
 //		jmsTemplate.convertAndSend(accountQueue, message);
-		jmsTemplate.convertAndSend(customerQueue, message);
+//		jmsTemplate.convertAndSend(customerQueue, message);
+		jmsTemplate.convertAndSend(loanQueue,message);
 	}
 
 	@Test
 	public void testSendAndReceive() {
 //		send(accountMessage);
 		send(accountMessage);
+//		send(customerMessage);
+		send(loanMessage);
 	}
 
 }

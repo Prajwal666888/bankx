@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
 
 import com.suntech.dao.LoanDao;
 import com.suntech.domain.Loans;
@@ -26,6 +27,7 @@ public class LoanTest {
 	private LoanDao loanDao;
 
 	@Test
+	@Rollback(false)
 	public void testLoan() {
 		Loans createLoan = LoanUtils.createLoan();
 		try {
@@ -42,11 +44,11 @@ public class LoanTest {
 		} catch (Exception e) {
 			System.out.println("error during executing test case for CRUD ATM");
 		} finally {
-			if (null != createLoan.getId()) {
-				Optional<Loans> deleteLoan = loanDao.findById(createLoan.getId());
-				loanDao.delete(deleteLoan.get());
-				System.out.println("data deleated");
-			}
+//			if (null != createLoan.getId()) {
+//				Optional<Loans> deleteLoan = loanDao.findById(createLoan.getId());
+//				loanDao.delete(deleteLoan.get());
+//				System.out.println("data deleated");
+//			}
 
 		}
 
