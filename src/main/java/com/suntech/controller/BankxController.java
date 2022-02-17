@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.suntech.AccountOpeningModel;
@@ -18,14 +17,22 @@ import com.suntech.domain.Bank;
 import com.suntech.domain.Branches;
 import com.suntech.domain.Customer;
 import com.suntech.domain.CustomerQuery;
+
+import com.suntech.domain.Employee;
+
 import com.suntech.domain.Insurance;
+
 import com.suntech.service.AccountService;
 import com.suntech.service.AccountTypeService;
 import com.suntech.service.BankService;
 import com.suntech.service.BranchService;
 import com.suntech.service.CustomerService;
 import com.suntech.service.CustomerqueryService;
+
+import com.suntech.service.EmployeeService;
+
 import com.suntech.service.InsuranceService;
+
 
 @RestController
 @Component
@@ -49,6 +56,8 @@ public class BankxController {
 	@Autowired
 	private CustomerqueryService customerqueryService;
 	
+	@Autowired
+	private EmployeeService employeeService;
 	@Autowired 
 	private InsuranceService insuranceService;
 
@@ -103,6 +112,16 @@ public class BankxController {
 		branchService.createAndSaveBranch(branches);
 		return branches;
 	}
+	
+//	Employee API
+	@PostMapping("/employee")
+	public Employee insertEmployee(@RequestBody()Employee employee) {
+		employeeService.createandSave(employee);
+		return employee;
+	}
+	
+	
+
 	@PostMapping("/insurance")
 	public Insurance insertInsurance(@RequestBody() Insurance insurance) {
 		insuranceService.createAndSaveInsurance(insurance);
