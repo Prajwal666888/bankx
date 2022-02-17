@@ -18,10 +18,10 @@ public class Loans extends IdDomain {
 	@Column(name = "amount")
 	private Double amount;
 
-	@Column(name = "loan_type")
+	@Column(name = "loantype")
 	private String loanType;
 
-	@Column(name = "rate_of_interest")
+	@Column(name = "rateofinterest")
 	private Double rateOfInterest;
 
 	@Column(name = "term")

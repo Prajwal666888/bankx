@@ -154,4 +154,11 @@ public class Customer extends IdDomain {
 		this.cards = cards;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", dob=" + dob + ", address=" + address + ", accountNo=" + accountNo
+				+ ", panNo=" + panNo + ", bank=" + bank + ", employee=" + employee + ", insurance=" + insurance
+				+ ", accounts=" + accounts + ", cards=" + cards + "]";
+	}
+
 }

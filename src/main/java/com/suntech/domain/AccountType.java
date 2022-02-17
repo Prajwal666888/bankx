@@ -3,6 +3,7 @@ package com.suntech.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,8 +23,16 @@ public class AccountType extends IdDomain {
 	@Column(name = "interestrate")
 	private Double interestRate;
 
-	@OneToOne(mappedBy = "accountType", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "accountType")
+	@JoinColumn(name = "account_id", referencedColumnName = "id")
 	private Account account;
+
+	@Override
+	public String toString() {
+		return "AccountType [transactionLimit=" + transactionLimit + ", depositAmount=" + depositAmount
+				+ ", withdrawlLimit=" + withdrawlLimit + ", interestRate=" + interestRate + ", account=" + account
+				+ "]";
+	}
 
 	public AccountType() {
 

@@ -1,3 +1,4 @@
+
 package com.suntech.controller;
 
 import org.json.JSONObject;
@@ -34,13 +35,13 @@ public class BankxController {
 
 	@Autowired
 	private BranchService branchService;
-	
+
 	@Autowired
 	private AccountService accountService;
-	
+
 	@Autowired
 	private AccountTypeService accountTypeService;
-	
+
 	@Autowired
 	private CustomerService customerService;
 
@@ -56,23 +57,20 @@ public class BankxController {
 	{
 		System.out.println("Message Received===>" + message);
 
-		JSONObject jsonObj = new JSONObject(message);
-
 		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
 		AccountOpeningModel accountOpeningModel = gson.fromJson(message, AccountOpeningModel.class);
-
-		AccountType accountType = accountOpeningModel.getAccountType();
-		Branches branch = accountOpeningModel.getBranches();
+		
 		Customer customer = accountOpeningModel.getCustomer();
-		Account account = accountOpeningModel.getAccount();
-
-		accountTypeService.createAndSave(accountType);
 		customerService.createAndSave(customer);
-		branchService.createAndSaveBranch(branch);
-		accountService.createAndSave(accountType, customer, account);
+		
+		AccountType accountType = accountOpeningModel.getAccountType();
+		Account account = accountOpeningModel.getAccount();
+		accountType.setAccount(account);
+		account.setAccountType(accountType);
+		accountTypeService.createAndSave(accountType);
 
-		System.out.println(jsonObj);
-
+		Account account2 = accountService.createAndSave(account);
+			
 	}
 
 	@JmsListener(destination = "${springjms.customerQueue}")
@@ -80,7 +78,7 @@ public class BankxController {
 		System.out.println("Message==>" + message);
 
 		JSONObject jsonObj = new JSONObject(message);
-		Gson gson =new Gson();
+		Gson gson = new Gson();
 		CustomerQuery customerQuery = gson.fromJson(message, CustomerQuery.class);
 		customerqueryService.createAndSaveCustomerquery(customerQuery);
 

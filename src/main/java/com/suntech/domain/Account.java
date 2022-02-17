@@ -27,7 +27,7 @@ public class Account extends IdDomain {
 	private Double overDraft;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "account_type_id")
+	@JoinColumn(name = "account_type_id" ,referencedColumnName = "id")
 	private AccountType accountType;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -111,6 +111,13 @@ public class Account extends IdDomain {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [accountNo=" + accountNo + ", balance=" + balance + ", overDraft=" + overDraft
+				+ ", accountType=" + accountType + ", loans=" + loans + ", cards=" + cards + ", customer=" + customer
+				+ "]";
 	}
 
 }

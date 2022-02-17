@@ -17,26 +17,26 @@ public class BranchServiceImpl implements BranchService {
 	
 	@Override
 	public Branches createAndSaveBranch(Branches branches) {
-		if(validateBranch(branches)) {
+//		if(validateBranch(branches)) {
 		branchDao.save(branches);
-		System.out.println(" Branch data saved successfully!");
-		} else {
-			System.out.println("Branch data is not saved!");
-		}
+//		System.out.println(" Branch data saved successfully!");
+//		} else {
+//			System.out.println("Branch data is not saved!");
+//		}
 		
 		return branches;
 	}
 	
 	//check for existing branches
-	public Boolean validateBranch(Branches branches) {
-		List<Branches> branchList = branchDao.findAll();
-			
-			for(Branches b:branchList) {
-				if(b.getLocation().equalsIgnoreCase(branches.getLocation())) {
-					return Boolean.TRUE;
-				}
-			}
-			return Boolean.FALSE;
-	}
+//	public Boolean validateBranch(Branches branches) {
+//		List<Branches> branchList = branchDao.findAll();
+//			
+//			for(Branches b:branchList) {
+//				if(b.getLocation().equalsIgnoreCase(branches.getLocation())) {
+//					return Boolean.TRUE;
+//				}
+//			}
+//			return Boolean.FALSE;
+//	}
 	}
 

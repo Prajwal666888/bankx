@@ -13,14 +13,13 @@ import org.springframework.jms.core.JmsTemplate;
 @SpringBootTest
 public class MyListenerTest {
 
-	private String message = "{\r\n" + "\"accountType\":{\r\n" + "	\"transactionlimit\": \"50000\",\r\n"
-			+ "	\"depositamt\":\"20000\",\r\n" + "	\"withdrawllimit\":\"49000\",\r\n" + "	\"interestrate\":\"8\"\r\n"
-			+ "},\r\n" + "\r\n" + "\"account\":{\r\n" + "	\"accountno\" : \"123456789\",\r\n"
-			+ "	\"balance\" : \"100000\",\r\n" + "	\"overdraft\" : \"80000\"\r\n" + "},\r\n" + "\r\n"
-			+ "\"branches\":{\r\n" + "	\"type\" : \"Sub-branch\",\r\n" + "	\"location\" : \"Bengaluru\"\r\n"
-			+ "	\r\n" + "},\r\n" + "\r\n" + "\"customer\":{\r\n" + "	\"name\" : \"James\",\r\n"
-			+ "	\"dob\" : \"10-12-2018\",\r\n" + "	\"address\" : \"banglore\",\r\n"
-			+ "	\"accountNo\" : \"123456789\",\r\n" + "	\"panNo\" : \"12AB23HH\"\r\n" + "}\r\n" + "}";
+	private String message = "{\n" + "   \"accountType\":{\n" + "      \"transactionLimit\":\"20000\",\n"
+			+ "      \"depositAmount\":\"50000\",\n" + "      \"withdrawlLimit\":\"69000\",\n"
+			+ "      \"interestRate\":\"66\"\n" + "   },\n" + "   \"account\":{\n" + "      \"accountNo\":\"987456\",\n"
+			+ "      \"balance\":\"200000\",\n" + "      \"overDraft\":\"60000\"\n" + "   },\n" + "   \"branches\":{\n"
+			+ "      \"type\":\"main\",\n" + "      \"location\":\".khjjhg\"\n" + "   },\n" + "   \"customer\":{\n"
+			+ "      \"name\":\"gyutry\",\n" + "      \"dob\":\"10-12-1996\",\n" + "      \"address\":\"Hennur\",\n"
+			+ "      \"accountNo\":\"987456\",\n" + "      \"panNo\":\"12AN125ZZ\"\n" + "   }\n" + "}";
 
 	private String customerMessage = "{\\r\\n\" + \"\\\"customerquery\\\":{\\r\\n\" + \"\\\"query\\\":\\\"messagereceived\\\",\\r\\n\"\r\n"
 			+ "			+ \"\\\"resolution\\\" :\\\"true\\\",\\r\\n\" + \"}\\r\\n\" + \"}";
