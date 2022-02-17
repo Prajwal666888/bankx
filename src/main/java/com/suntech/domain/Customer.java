@@ -36,6 +36,9 @@ public class Customer extends IdDomain {
 
 	@Column(name = "panno", nullable = false)
 	private String panNo;
+	
+	@Column(name = "email")
+	private String email;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "bank_id")
