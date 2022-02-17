@@ -42,7 +42,7 @@ public class MyListenerTest {
 	@Test
 	public void testSendAndReceive() {
 //		send(accountMessage);
-		send(customerMessage);
+		send(accountMessage);
 	}
 
 }
