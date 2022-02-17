@@ -19,6 +19,7 @@ import com.suntech.domain.Branches;
 import com.suntech.domain.Customer;
 import com.suntech.domain.CustomerQuery;
 import com.suntech.domain.Insurance;
+import com.suntech.domain.Loans;
 import com.suntech.service.AccountService;
 import com.suntech.service.AccountTypeService;
 import com.suntech.service.BankService;
@@ -26,6 +27,7 @@ import com.suntech.service.BranchService;
 import com.suntech.service.CustomerService;
 import com.suntech.service.CustomerqueryService;
 import com.suntech.service.InsuranceService;
+import com.suntech.service.LoanService;
 
 @RestController
 @Component
@@ -51,6 +53,10 @@ public class BankxController {
 	
 	@Autowired 
 	private InsuranceService insuranceService;
+	
+	
+	@Autowired
+	private LoanService loanService;
 
 	@Value("${springjms.accountQueue}")
 	private String queue;
@@ -91,6 +97,22 @@ public class BankxController {
 
 		System.out.println(jsonObj);
 	}
+	
+	
+	@JmsListener(destination = "${springjms.loanQueue}")
+	public void receiveFromLoanQueue(String message) {
+		System.out.println("Message==>" + message);
+
+		JSONObject jsonObj = new JSONObject(message);
+		Gson gson =new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
+		
+		Loans loans = gson.fromJson(message,Loans.class);
+		System.out.println(loans.toString());
+		loanService.createAndSaveLoans(loans);
+		
+		
+	}
+
 
 	@PostMapping("/bank")
 	public Bank insertBank(@RequestBody() Bank bank) {
