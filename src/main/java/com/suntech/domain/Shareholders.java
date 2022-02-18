@@ -42,9 +42,13 @@ public class Shareholders extends IdDomain {
 		super();
 	}
 
-	public Shareholders(String name) {
+	public Shareholders(String name, List<Shares> shares, Employee employee, Customer customer, Bank bank) {
 		super();
 		this.name = name;
+		this.shares = shares;
+		this.employee = employee;
+		this.customer = customer;
+		this.bank = bank;
 	}
 
 	public String getName() {

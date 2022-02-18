@@ -1,7 +1,9 @@
 package com.suntech.service.support;
 
-import java.util.List;
+import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,35 +16,14 @@ import com.suntech.service.AccountService;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-	
+	protected final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
+
 	@Autowired
 	private AccountDao accountDao;
 
 	@Override
-	public Account createAndSave(AccountType accountType, Customer customer,Account account) {
-		if(validateAccount(account)) {
-		account.setAccountType(accountType);
-		account.setCustomer(customer);
-		accountDao.save(account);
-		return account;
-		}
-		System.out.println("Account already exist");
-		return null;
+	public Account createAndSave(Account account) {
+		return accountDao.save(account);
 	}
-	
-		
-	public Boolean validateAccount(Account account) {
-			List<Account> accounts = accountDao.findAll();
-			
-			for(Account ac:accounts) {
-				if(ac.getaccountNo()==account.getaccountNo()) {
-					continue;
-				}
-			}
-			return true;
-			
-	}
-	
-	 
 
 }
