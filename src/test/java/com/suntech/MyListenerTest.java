@@ -25,6 +25,14 @@ public class MyListenerTest {
 	private String customerMessage = "{\\r\\n\" + \"\\\"customerquery\\\":{\\r\\n\" + \"\\\"query\\\":\\\"messagereceived\\\",\\r\\n\"\r\n"
 			+ "			+ \"\\\"resolution\\\" :\\\"true\\\",\\r\\n\" + \"}\\r\\n\" + \"}";
 
+	private String cardMessage = " {\r\n"
+			+ " 	\"cardNo\": \"212345\",\r\n"
+			+ " 	\"validFrom\": \"01-01-2021\",\r\n"
+			+ " 	\"validTo\": \"01-01-2025\"\r\n"
+			+ "\r\n"
+			+ " }";
+			
+
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
@@ -33,16 +41,26 @@ public class MyListenerTest {
 
 	@Value("${springjms.customerQueue}")
 	private String customerQueue;
+	
+	
+	
+	@Value("${springjms.cardQueue}")
+	private String cardQueue;
 
 	public void send(String message) {
 //		jmsTemplate.convertAndSend(accountQueue, message);
-		jmsTemplate.convertAndSend(customerQueue, message);
+		//jmsTemplate.convertAndSend(customerQueue, message);
+		
+		jmsTemplate.convertAndSend(cardQueue, message);
+		
 	}
 
 	@Test
 	public void testSendAndReceive() {
 //		send(accountMessage);
-		send(customerMessage);
+		//send(customerMessage);
+		
+		send(cardMessage);
 	}
 
 }

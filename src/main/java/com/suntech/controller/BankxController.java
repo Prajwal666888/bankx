@@ -16,12 +16,15 @@ import com.suntech.domain.Account;
 import com.suntech.domain.AccountType;
 import com.suntech.domain.Bank;
 import com.suntech.domain.Branches;
+import com.suntech.domain.Card;
 import com.suntech.domain.Customer;
 import com.suntech.domain.CustomerQuery;
+
 import com.suntech.service.AccountService;
 import com.suntech.service.AccountTypeService;
 import com.suntech.service.BankService;
 import com.suntech.service.BranchService;
+import com.suntech.service.CardService;
 import com.suntech.service.CustomerService;
 import com.suntech.service.CustomerqueryService;
 
@@ -46,6 +49,9 @@ public class BankxController {
 
 	@Autowired
 	private CustomerqueryService customerqueryService;
+	
+	@Autowired
+	private CardService cardService;
 
 	@Value("${springjms.accountQueue}")
 	private String queue;
@@ -87,6 +93,35 @@ public class BankxController {
 		System.out.println(jsonObj);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@JmsListener(destination = "${springjms.cardQueue}")
+	public void receiveFromcardQueue(String message)
+
+	{
+		System.out.println("Message Received===>" + message);
+
+
+		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
+		
+		Card card = gson.fromJson(message, Card.class);
+		cardService.addCard(card);
+	
+	}	
+		
 	@PostMapping("/bank")
 	public Bank insertBank(@RequestBody() Bank bank) {
 		bankService.createAndSaveBank(bank);
@@ -97,6 +132,11 @@ public class BankxController {
 	public Branches insertBranches(@RequestBody() Branches branches) {
 		branchService.createAndSaveBranch(branches);
 		return branches;
+	}
+	
+	@PostMapping("/card")
+	public Card addCard(@RequestBody() Card card) {
+		return cardService.addCard(card);
 	}
 
 }
