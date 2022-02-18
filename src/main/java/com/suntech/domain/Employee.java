@@ -21,7 +21,7 @@ public class Employee extends IdDomain {
 	@Column(name = "salary")
 	private Double salary;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employee")
 	private Shareholders shareholders;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
