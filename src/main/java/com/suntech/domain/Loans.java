@@ -84,4 +84,10 @@ public class Loans extends IdDomain {
 		this.account = account;
 	}
 
+	@Override
+	public String toString() {
+		return "Loans [amount=" + amount + ", loanType=" + loanType + ", rateOfInterest=" + rateOfInterest + ", term="
+				+ term + ", account=" + account + "]";
+	}
+
 }
