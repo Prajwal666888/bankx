@@ -1,11 +1,15 @@
 
 package com.suntech.controller;
 
+import java.util.List;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -183,4 +187,19 @@ public class BankxController {
 		insuranceService.createAndSaveInsurance(insurance);
 		return insurance;
 	}
+	
+	
+	@GetMapping("/insurance")
+	public List<Insurance> getInsurance(){
+		return insuranceService.findAll()   ;
+		
+		
+	}
+	@GetMapping("/insurance/{id}")
+	public Insurance getInsurances(@PathVariable() Integer id)
+	{
+		return insuranceService.find(id);
+	}
+	
+	
 }

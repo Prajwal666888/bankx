@@ -51,6 +51,11 @@ public class Customer extends IdDomain {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "insurance_id")
 	private Insurance insurance;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
+	private Shareholders shareholders;
+	
+	@OneToMany(cascade =  CascadeType.ALL)
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Account> accounts = new ArrayList<Account>();
@@ -67,7 +72,6 @@ public class Customer extends IdDomain {
 	private List<Card> cards = new ArrayList<Card>();
 
 	public Customer() {
-		super();
 	}
 
 	
