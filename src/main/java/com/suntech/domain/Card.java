@@ -36,11 +36,13 @@ public class Card extends IdDomain {
 		super();
 	}
 
-	public Card(Long cardNo, String validFrom, String validTo) {
+	public Card(Long cardNo, String validFrom, String validTo, Account account, Customer customer) {
 		super();
 		this.cardNo = cardNo;
 		this.validFrom = validFrom;
 		this.validTo = validTo;
+		this.account = account;
+		this.customer = customer;
 	}
 
 	public Long getCardNo() {

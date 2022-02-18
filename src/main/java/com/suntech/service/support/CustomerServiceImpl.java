@@ -17,22 +17,22 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer createAndSave(Customer customer) {
-		if(customerValidation(customer)) {
+//		if(customerValidation(customer)) {
 			customerDao.save(customer);
-		} 
+//		} 
 		return customer;
 	}
 	
-	public boolean customerValidation(Customer customer) {
-		
-		List<Customer> customerList = customerDao.findAll();
-			for(Customer c:customerList) {
-				if(c.getAccountNo()!=customer.getAccountNo()) {
-					return true;
-				}
-			}
-			return false;
-		
-	}
+//	public boolean customerValidation(Customer customer) {
+//		
+//		List<Customer> customerList = customerDao.findAll();
+//			for(Customer c:customerList) {
+//				if(c.getAccountNo()!=customer.getAccountNo()) {
+//					return true;
+//				}
+//			}
+//			return false;
+//		
+//	}
 
 }

@@ -38,13 +38,15 @@ public class Shares extends IdDomain {
 		super();
 	}
 
-	public Shares(Double number, Double value, String type, Double equity, String preferrential) {
+	public Shares(Double number, Double value, String type, Double equity, String preferrential,
+			Shareholders shareholders) {
 		super();
 		this.number = number;
 		this.value = value;
 		this.type = type;
 		this.equity = equity;
 		this.preferrential = preferrential;
+		this.shareholders = shareholders;
 	}
 
 	public Double getNumber() {

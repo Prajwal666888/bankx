@@ -25,17 +25,10 @@ public class Branches extends IdDomain {
 		super();
 	}
 
-	public Branches(String type, String location) {
+	public Branches(String type, String location, Bank bank) {
+		super();
 		this.type = type;
 		this.location = location;
-
-	}
-
-	public Bank getBank() {
-		return bank;
-	}
-
-	public void setBank(Bank bank) {
 		this.bank = bank;
 	}
 
@@ -53,6 +46,14 @@ public class Branches extends IdDomain {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public Bank getBank() {
+		return bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 
 }

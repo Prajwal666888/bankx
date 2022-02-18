@@ -30,10 +30,11 @@ public class Atm extends IdDomain {
 		super();
 	}
 
-	public Atm(String location, Double amountOfCash) {
+	public Atm(String location, Double amountOfCash, Bank bank) {
 		super();
 		this.location = location;
 		this.amountOfCash = amountOfCash;
+		this.bank = bank;
 	}
 
 	public String getLocation() {
@@ -50,6 +51,14 @@ public class Atm extends IdDomain {
 
 	public void setAmountOfCash(Double amountOfCash) {
 		this.amountOfCash = amountOfCash;
+	}
+
+	public Bank getBank() {
+		return bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.suntech;
+package com.suntech.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suntech.domain.Account;

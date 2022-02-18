@@ -55,9 +55,9 @@ public class AccountTest {
 	}
 
 	public void validateEquals(Account account, Account updatedAccount) {
-		assertEquals(account.getaccountNo(), updatedAccount.getaccountNo());
+		assertEquals(account.getAccountNo(), updatedAccount.getAccountNo());
 		assertEquals(account.getBalance(), updatedAccount.getBalance());
-		assertEquals(account.getoverDraft(), updatedAccount.getoverDraft());
+		assertEquals(account.getOverDraft(), updatedAccount.getOverDraft());
 	}
 
 }
