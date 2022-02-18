@@ -70,8 +70,7 @@ public class Customer extends IdDomain {
 		super();
 	}
 
-	public Customer(String name, Date dob, String address, Long accountNo, String panNo, Bank bank, Employee employee,
-			Insurance insurance, List<Account> accounts, List<Card> cards) {
+	
 	public Customer(String name, Date dob, String address, Long accountNo, String panNo,String email) {
 		super();
 		this.name = name;
