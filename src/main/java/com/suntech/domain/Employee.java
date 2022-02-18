@@ -35,11 +35,14 @@ public class Employee extends IdDomain {
 		super();
 	}
 
-	public Employee(String name, String type, Double salary) {
+	public Employee(String name, String type, Double salary, Shareholders shareholders, Customer customer, Bank bank) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.salary = salary;
+		this.shareholders = shareholders;
+		this.customer = customer;
+		this.bank = bank;
 	}
 
 	public String getName() {

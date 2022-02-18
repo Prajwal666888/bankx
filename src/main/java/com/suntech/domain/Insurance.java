@@ -28,15 +28,19 @@ public class Insurance extends IdDomain {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "insurance")
 	private List<Customer> customers = new ArrayList<Customer>();
 
-	public Insurance(String issuing_company, String type, Double premium_payment, Integer term) {
+	public Insurance() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Insurance(String issuing_company, String type, Double premium_payment, Integer term,
+			List<Customer> customers) {
+		super();
 		this.issuing_company = issuing_company;
 		this.type = type;
 		this.premium_payment = premium_payment;
 		this.term = term;
-	}
-
-	public Insurance() {
-
+		this.customers = customers;
 	}
 
 	public String getIssuing_company() {

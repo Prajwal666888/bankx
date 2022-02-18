@@ -9,41 +9,34 @@ import com.suntech.dao.BranchDao;
 import com.suntech.domain.Branches;
 import com.suntech.service.BranchService;
 
-import io.micrometer.core.instrument.config.validate.Validated.Valid;
-
 @Service
 public class BranchServiceImpl implements BranchService {
 
 	@Autowired
 	private BranchDao branchDao;
 	
-	private String branchLocation;
-
 	@Override
 	public Branches createAndSaveBranch(Branches branches) {
-		if(validateBranch(branches)) {
+//		if(validateBranch(branches)) {
 		branchDao.save(branches);
-		}
+//		System.out.println(" Branch data saved successfully!");
+//		} else {
+//			System.out.println("Branch data is not saved!");
+//		}
 		
 		return branches;
 	}
 	
-	public Boolean validateBranch(Branches branches) {
-		Boolean flag=false;
-		List<Branches> branchList = branchDao.findAll();
-			
-			for(Branches b:branchList) {
-				if(b.getLocation().equalsIgnoreCase(branches.getLocation())) {
-					flag=true;
-					break;	
-				}
-			}
-			if(flag) {
-				return true;
-			}else  {
-				System.out.println("Branch doesn't exist");
-				return false;
-			}
+	//check for existing branches
+//	public Boolean validateBranch(Branches branches) {
+//		List<Branches> branchList = branchDao.findAll();
+//			
+//			for(Branches b:branchList) {
+//				if(b.getLocation().equalsIgnoreCase(branches.getLocation())) {
+//					return Boolean.TRUE;
+//				}
+//			}
+//			return Boolean.FALSE;
+//	}
 	}
 
-}

@@ -429,9 +429,32 @@
 
 	<!-- droping overdraft column from customer table -->
 	<changeSet author="sachin" id="customer.7">
-		<dropColumn columnName="overdraft"
-			tableName="customer">
+		<dropColumn columnName="overdraft" tableName="customer">
 			<column name="overdraft" />
 		</dropColumn>
+	</changeSet>
+
+	<!-- droping fk_account_accountType_id constraint from account_type table -->
+	<changeSet author="sujay" id="account_type.3">
+		<dropForeignKeyConstraint
+			baseTableName="account_type"
+			constraintName="fk_account_accountType_id" />
+	</changeSet>
+
+	<!-- droping account_id column from account_type table -->
+	<changeSet author="sujay" id="account_type.4">
+		<dropColumn columnName="account_id"
+			tableName="account_type">
+			<column name="account_id" />
+		</dropColumn>
+	</changeSet>
+
+	<!--adding email column to customer -->
+	<changeSet author="sachin" id="customer.11">
+		<addColumn tableName="customer">
+			<column name="email" type="varchar(255)" />
+
+
+		</addColumn>
 	</changeSet>
 </databaseChangeLog>
