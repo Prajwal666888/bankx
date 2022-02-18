@@ -18,10 +18,10 @@ public class Loans extends IdDomain {
 	@Column(name = "amount")
 	private Double amount;
 
-	@Column(name = "loan_type")
+	@Column(name = "loantype")
 	private String loanType;
 
-	@Column(name = "rate_of_interest")
+	@Column(name = "rateofinterest")
 	private Double rateOfInterest;
 
 	@Column(name = "term")
@@ -82,6 +82,12 @@ public class Loans extends IdDomain {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	@Override
+	public String toString() {
+		return "Loans [amount=" + amount + ", loanType=" + loanType + ", rateOfInterest=" + rateOfInterest + ", term="
+				+ term + ", account=" + account + "]";
 	}
 
 }

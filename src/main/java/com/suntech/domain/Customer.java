@@ -36,6 +36,9 @@ public class Customer extends IdDomain {
 
 	@Column(name = "panno", nullable = false)
 	private String panNo;
+	
+	@Column(name = "email")
+	private String email;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "bank_id")
@@ -67,13 +70,22 @@ public class Customer extends IdDomain {
 		super();
 	}
 
-	public Customer(String name, Date dob, String address, Long accountNo, String panNo) {
+	public Customer(String name, Date dob, String address, Long accountNo, String panNo,String email) {
 		super();
 		this.name = name;
 		this.dob = dob;
 		this.address = address;
 		this.accountNo = accountNo;
 		this.panNo = panNo;
+		this.email=email;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getName() {

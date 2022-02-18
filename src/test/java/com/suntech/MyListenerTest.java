@@ -33,6 +33,20 @@ public class MyListenerTest {
 			+ " }";
 			
 
+	private String customerMessage = 
+			"{\r\n"
+			+ " 	\"query\": \"messagereceived\",\r\n"
+			+ " 	\"resolution\": true\r\n"
+			+ " }";
+	
+	private String loanMessage ="{\r\n"
+			+ " 	\"amount\": \"20000\",\r\n"
+			+ " 	\"loanType\": \"Home loan\",\r\n"
+			+ " 	\"rateOfInterest\": \"5\",\r\n"
+			+ " 	\"term\": \"short\"\r\n"
+			+ " }";
+	
+	
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
@@ -53,6 +67,13 @@ public class MyListenerTest {
 		
 		jmsTemplate.convertAndSend(cardQueue, message);
 		
+	@Value("${springjms.loanQueue}")
+	private String loanQueue;
+
+	public void send(String message) {
+//		jmsTemplate.convertAndSend(accountQueue, message);
+//		jmsTemplate.convertAndSend(customerQueue, message);
+		jmsTemplate.convertAndSend(loanQueue,message);
 	}
 
 	@Test
@@ -61,6 +82,9 @@ public class MyListenerTest {
 		//send(customerMessage);
 		
 		send(cardMessage);
+		send(accountMessage);
+//		send(customerMessage);
+		send(loanMessage);
 	}
 
 }
