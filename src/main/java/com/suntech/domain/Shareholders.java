@@ -17,7 +17,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "shareholder")
+@Table(name = "shareholders")
 public class Shareholders extends IdDomain {
 
 	@Column(name = "name")
@@ -27,9 +27,11 @@ public class Shareholders extends IdDomain {
 	private List<Shares> shares = new ArrayList<Shares>();
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "employee_id")
 	private Employee employee;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -38,7 +40,6 @@ public class Shareholders extends IdDomain {
 
 	public Shareholders() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Shareholders(String name, List<Shares> shares, Employee employee, Customer customer, Bank bank) {

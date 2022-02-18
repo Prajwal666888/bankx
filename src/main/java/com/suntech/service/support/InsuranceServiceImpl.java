@@ -1,5 +1,7 @@
 package com.suntech.service.support;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,18 @@ public class InsuranceServiceImpl implements InsuranceService {
 	public Insurance createAndSaveInsurance(Insurance insurance) {
 		insuranceDao.save(insurance);
 		return insurance;
+	}
+	
+	@Override
+    public Insurance find(Integer id)
+    {
+    	return insuranceDao.findById(id).get();
+    }
+    
+	@Override
+	public List<Insurance> findAll() {
+		// TODO Auto-generated method stub
+		return (List<Insurance>) insuranceDao.findAll();
 	}
 
 }

@@ -457,4 +457,36 @@
 
 		</addColumn>
 	</changeSet>
+	
+	<!--adding email column to shareholders -->
+	<changeSet author="sachin" id="shareholders.3">
+		<addColumn tableName="shareholders">
+			<column name="employee_id" type="int" />
+		</addColumn>
+	</changeSet>
+	
+	<!--adding email column to shareholders -->
+	<changeSet author="sachin" id="shareholders.4">
+		<addColumn tableName="shareholders">
+			<column name="customer_id" type="int" />
+		</addColumn>
+	</changeSet>
+	
+	<!-- Foreign key Constraints for shareholders -->
+	<changeSet author="sujay" id="shareholders.5">
+		<addForeignKeyConstraint
+			constraintName="fk_customer_shareholders_id" baseColumnNames="customer_id"
+			baseTableName="shareholders" referencedColumnNames="id"
+			referencedTableName="customer" />
+	</changeSet>
+	
+	<!-- Foreign key Constraints for shareholders -->
+	<changeSet author="sujay" id="shareholders.6">
+		<addForeignKeyConstraint
+			constraintName="fk_employee_shareholders_id" baseColumnNames="employee_id"
+			baseTableName="shareholders" referencedColumnNames="id"
+			referencedTableName="employee" />
+	</changeSet>
+	
+	
 </databaseChangeLog>
