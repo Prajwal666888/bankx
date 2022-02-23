@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.suntech.domain.Account;
@@ -22,22 +23,18 @@ import com.suntech.domain.Branches;
 import com.suntech.domain.Card;
 import com.suntech.domain.Customer;
 import com.suntech.domain.CustomerQuery;
-import com.suntech.model.AccountOpeningModel;
-
 import com.suntech.domain.Employee;
-
 import com.suntech.domain.Insurance;
 import com.suntech.domain.Loans;
-
+import com.suntech.model.AccountOpeningModel;
+import com.suntech.service.AccountService;
 import com.suntech.service.AccountTypeService;
 import com.suntech.service.BankService;
 import com.suntech.service.BranchService;
 import com.suntech.service.CardService;
 import com.suntech.service.CustomerService;
 import com.suntech.service.CustomerqueryService;
-
 import com.suntech.service.EmployeeService;
-
 import com.suntech.service.InsuranceService;
 import com.suntech.service.LoanService;
 import com.suntech.utils.AccountUtils;
@@ -75,7 +72,7 @@ public class BankxController {
 	private CardService cardService;
 
 	private EmployeeService employeeService;
-
+  
 	@Autowired
 	private InsuranceService insuranceService;
 
@@ -132,6 +129,23 @@ public class BankxController {
 
 	@JmsListener(destination = "${springjms.loanQueue}")
 	public void receiveFromLoanQueue(String message) {
+		System.out.println("Message==>" + message);
+
+		JSONObject jsonObj = new JSONObject(message);
+		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
+
+		Loans loans = gson.fromJson(message, Loans.class);
+		System.out.println(loans.toString());
+		loanService.createAndSaveLoans(loans);
+
+	}
+
+	@JmsListener(destination = "${springjms.cardQueue}")
+	public void receiveFromcardQueue(String message)
+
+	{
+		System.out.println("Message Received===>" + message);
+
 		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
 		Loans loans = gson.fromJson(message, Loans.class);
 		loanService.createAndSaveLoans(loans);
@@ -140,6 +154,7 @@ public class BankxController {
 	@JmsListener(destination = "${springjms.cardQueue}")
 	public void receiveFromcardQueue(String message) {
 		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
+
 		Card card = gson.fromJson(message, Card.class);
 		cardService.addCard(card);
 
@@ -177,7 +192,6 @@ public class BankxController {
 	@GetMapping("/insurance")
 	public List<Insurance> getInsurance() {
 		return insuranceService.findAll();
-
 	}
 
 	@GetMapping("/insurance/{id}")
