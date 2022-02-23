@@ -20,8 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailServiceUtils {
 
-	private static final String SUCCESS_MESSAGE = "Account has been successfully opened.";
-	private static final String FAILURE_MESSAGE = "Failed to open account.";
+	
 
 	/**
 	 * @param receiverMail
@@ -31,7 +30,7 @@ public class MailServiceUtils {
 	 * @throws MessagingException
 	 * @throws IOException
 	 */
-	public void sendmail(String receiverMail, String content, Boolean success)
+	public void sendmail(String receiverMail, String content, Boolean success,String subject)
 			throws AddressException, MessagingException, IOException {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -50,12 +49,12 @@ public class MailServiceUtils {
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverMail));
 		MimeBodyPart messageBodyPart = new MimeBodyPart();
 		if (success) {
-			msg.setSubject(SUCCESS_MESSAGE);
+			msg.setSubject(subject);
 			msg.setContent("BankX", "text/html");
 			msg.setSentDate(new Date());
 			messageBodyPart.setContent(content, "text/html");
 		} else {
-			msg.setSubject(FAILURE_MESSAGE);
+			msg.setSubject(subject);
 			msg.setContent("BankX", "text/html");
 			msg.setSentDate(new Date());
 			messageBodyPart.setContent(content, "text/html");

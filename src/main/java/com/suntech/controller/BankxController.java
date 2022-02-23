@@ -47,6 +47,9 @@ import com.suntech.utils.MailServiceUtils;
 @Component
 public class BankxController {
 
+	private static final String SUCCESS_MESSAGE = "Account has been successfully opened.";
+	private static final String FAILURE_MESSAGE = "Failed to open account.";
+
 	@Autowired
 	private MailServiceUtils mailServiceUtils;
 
@@ -97,20 +100,21 @@ public class BankxController {
 			Long accountNumber = accountUtils.generateAccountNumber();
 			account.setAccountNo(accountNumber);
 			AccountType accountType = accountOpeningModel.getAccountType();
-			
-			messageContent = "Congratulation's you have successfully created your bank account."+" and your accountNumber is "+accountNumber;
+
+			messageContent = "Congratulation's you have successfully created your bank account."
+					+ " and your accountNumber is " + accountNumber;
 			accountType.setAccount(account);
 			account.setCustomer(customer);
 			account.setAccountType(accountType);
 			accountTypeService.createAndSave(accountType);
-			mailServiceUtils.sendmail(receiverEmail, messageContent, Boolean.TRUE);
+			mailServiceUtils.sendmail(receiverEmail, messageContent, Boolean.TRUE, SUCCESS_MESSAGE);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			messageContent = "Sorry ,unable to create bank account ;(";
 			if (StringUtils.hasText(receiverEmail)) {
 				try {
-					mailServiceUtils.sendmail(receiverEmail, messageContent, Boolean.FALSE);
+					mailServiceUtils.sendmail(receiverEmail, messageContent, Boolean.FALSE, FAILURE_MESSAGE);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
