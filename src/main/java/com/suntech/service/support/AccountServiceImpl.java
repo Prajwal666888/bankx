@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.suntech.dao.AccountDao;
 import com.suntech.domain.Account;
-import com.suntech.domain.AccountType;
-import com.suntech.domain.Customer;
 import com.suntech.service.AccountService;
 
 @Service
@@ -22,6 +20,7 @@ public class AccountServiceImpl implements AccountService {
 	private AccountDao accountDao;
 
 	@Override
+	@Transactional
 	public Account createAndSave(Account account) {
 		return accountDao.save(account);
 	}

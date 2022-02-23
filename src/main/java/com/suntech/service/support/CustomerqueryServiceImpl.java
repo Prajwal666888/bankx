@@ -1,5 +1,7 @@
 package com.suntech.service.support;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ public class CustomerqueryServiceImpl implements CustomerqueryService{
 	private CustomerqueryDao customerqueryDao;
 	
 	@Override
+	@Transactional
 	public CustomerQuery createAndSaveCustomerquery(CustomerQuery customerQuery) {
 		// TODO Auto-generated method stub
 		customerqueryDao.save(customerQuery);
