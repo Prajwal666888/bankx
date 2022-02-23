@@ -15,39 +15,57 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MailServiceUtils {
-	
-	public static void sendmail(String... content) throws AddressException, MessagingException, IOException {
-		   Properties props = new Properties();
-		   props.put("mail.smtp.auth", "true");
-		   props.put("mail.smtp.starttls.enable", "true");
-		   props.put("mail.smtp.host", "smtp.gmail.com");
-		   props.put("mail.smtp.port", "587");
-		   
-		   javax.mail.Session session = javax.mail.Session.getInstance(props, new javax.mail.Authenticator() {
-		      protected PasswordAuthentication getPasswordAuthentication() {
-		         return new PasswordAuthentication("sachingr48@gmail.com", "Gsach@12");
-		      }
-		   });
-		   Message msg = new MimeMessage(session);
-		   msg.setFrom(new InternetAddress("sachingr48@gmail.com", false));
 
-		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("prajwal329@gmail.com"));
-		   msg.setSubject("Sachin Gr");
-		   msg.setContent("sachin gr", "text/html");
-		   msg.setSentDate(new Date());
+	private static final String SUCCESS_MESSAGE = "Account has been successfully opened.";
+	private static final String FAILURE_MESSAGE = "Failed to open account.";
 
-		   MimeBodyPart messageBodyPart = new MimeBodyPart();
-		   messageBodyPart.setContent("Hello From sachin", "text/html");
+	/**
+	 * @param receiverMail
+	 * @param content
+	 * @param success
+	 * @throws AddressException
+	 * @throws MessagingException
+	 * @throws IOException
+	 */
+	public void sendmail(String receiverMail, String content, Boolean success)
+			throws AddressException, MessagingException, IOException {
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
 
-		   Multipart multipart = new MimeMultipart();
-		   multipart.addBodyPart(messageBodyPart);
-		   MimeBodyPart attachPart = new MimeBodyPart();
+		javax.mail.Session session = javax.mail.Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("sfernandis4@gmail.com", "Stephan@123");
+			}
+		});
+		Message msg = new MimeMessage(session);
+		msg.setFrom(new InternetAddress("sfernandis4@gmail.com", false));
 
-		   attachPart.attachFile("C://Users//PRAJWAL.H R//Desktop/git.png");
-		   multipart.addBodyPart(attachPart);
-		   msg.setContent(multipart);
-		   Transport.send(msg);   
+		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverMail));
+		MimeBodyPart messageBodyPart = new MimeBodyPart();
+		if (success) {
+			msg.setSubject(SUCCESS_MESSAGE);
+			msg.setContent("BankX", "text/html");
+			msg.setSentDate(new Date());
+			messageBodyPart.setContent(content, "text/html");
+		} else {
+			msg.setSubject(FAILURE_MESSAGE);
+			msg.setContent("BankX", "text/html");
+			msg.setSentDate(new Date());
+			messageBodyPart.setContent(content, "text/html");
 		}
+
+		Multipart multipart = new MimeMultipart();
+		multipart.addBodyPart(messageBodyPart);
+
+		msg.setContent(multipart);
+		Transport.send(msg);
+	}
 
 }

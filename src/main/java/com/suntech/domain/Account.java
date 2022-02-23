@@ -115,9 +115,9 @@ public class Account extends IdDomain {
 
 	@Override
 	public String toString() {
-		return "Account [accountNo=" + accountNo + ", balance=" + balance + ", overDraft=" + overDraft
-				+ ", accountType=" + accountType + ", loans=" + loans + ", cards=" + cards + ", customer=" + customer
-				+ "]";
+		return "Account [accountNo=" + accountNo + ", balance=" + balance + ", overDraft=" + overDraft + "]";
 	}
+
+
 
 }
