@@ -13,37 +13,26 @@ import org.springframework.jms.core.JmsTemplate;
 @SpringBootTest
 public class MyListenerTest {
 
-	private String message = "{\n" + "   \"accountType\":{\n" + "      \"transactionLimit\":\"20000\",\n"
-			+ "      \"depositAmount\":\"50000\",\n" + "      \"withdrawlLimit\":\"69000\",\n"
-			+ "      \"interestRate\":\"66\"\n" + "   },\n" + "   \"account\":{\n" + "      \"accountNo\":\"987456\",\n"
-			+ "      \"balance\":\"200000\",\n" + "      \"overDraft\":\"60000\"\n" + "   },\n" + "   \"branches\":{\n"
-			+ "      \"type\":\"main\",\n" + "      \"location\":\".khjjhg\"\n" + "   },\n" + "   \"customer\":{\n"
-			+ "      \"name\":\"gyutry\",\n" + "      \"dob\":\"10-12-1996\",\n" + "      \"address\":\"Hennur\",\n"
-			+ "      \"accountNo\":\"987456\",\n" + "      \"panNo\":\"12AN125ZZ\"\n" + "   }\n" + "}";
+	private String message = "{\r\n" + " 	\"accountType\": {\r\n" + " 		\"transactionLimit\": \"20000\",\r\n"
+			+ " 		\"depositAmount\": \"50000\",\r\n" + " 		\"withdrawlLimit\": \"69000\",\r\n"
+			+ " 		\"interestRate\": \"66\"\r\n" + " 	},\r\n" + " 	\"account\": {\r\n"
+			+ " 		\"accountNo\": \"987456\",\r\n" + " 		\"balance\": \"200000\",\r\n"
+			+ " 		\"overDraft\": \"60000\"\r\n" + " 	},\r\n" + " 	\"branches\": {\r\n"
+			+ " 		\"type\": \"main\",\r\n" + " 		\"location\": \".khjjhg\"\r\n" + " 	},\r\n"
+			+ " 	\"customer\": {\r\n" + " 		\"name\": \"gyutry\",\r\n" + " 		\"dob\": \"10-12-1996\",\r\n"
+			+ " 		\"address\": \"Hennur\",\r\n" + " 		\"accountNo\": \"987456\",\r\n"
+			+ " 		\"panNo\": \"12AN125ZZ\",\r\n" + " 		\"email\": \"sachingr48@gmail.com\"\r\n" + " 	}\r\n"
+			+ " }";
 
-	
-	private String cardMessage = " {\r\n"
-			+ " 	\"cardNo\": \"212345\",\r\n"
-			+ " 	\"validFrom\": \"01-01-2021\",\r\n"
-			+ " 	\"validTo\": \"01-01-2025\"\r\n"
-			+ "\r\n"
-			+ " }";
-			
+	private String cardMessage = " {\r\n" + " 	\"cardNo\": \"212345\",\r\n" + " 	\"validFrom\": \"01-01-2021\",\r\n"
+			+ " 	\"validTo\": \"01-01-2025\"\r\n" + "\r\n" + " }";
 
-	private String customerMessage = 
-			"{\r\n"
-			+ " 	\"query\": \"messagereceived\",\r\n"
-			+ " 	\"resolution\": true\r\n"
-			+ " }";
-	
-	private String loanMessage ="{\r\n"
-			+ " 	\"amount\": \"20000\",\r\n"
-			+ " 	\"loanType\": \"Home loan\",\r\n"
-			+ " 	\"rateOfInterest\": \"5\",\r\n"
-			+ " 	\"term\": \"short\"\r\n"
-			+ " }";
-	
-	
+	private String customerMessage = "{\r\n" + " 	\"query\": \"messagereceived\",\r\n"
+			+ " 	\"resolution\": true\r\n" + " }";
+
+	private String loanMessage = "{\r\n" + " 	\"amount\": \"20000\",\r\n" + " 	\"loanType\": \"Home loan\",\r\n"
+			+ " 	\"rateOfInterest\": \"5\",\r\n" + " 	\"term\": \"short\"\r\n" + " }";
+
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
@@ -52,7 +41,7 @@ public class MyListenerTest {
 
 	@Value("${springjms.customerQueue}")
 	private String customerQueue;
-	
+
 	@Value("${springjms.loanQueue}")
 	private String loanQueue;
 
@@ -60,28 +49,26 @@ public class MyListenerTest {
 ////		jmsTemplate.convertAndSend(accountQueue, message);
 ////		jmsTemplate.convertAndSend(customerQueue, message);
 //	}
-	
+
 	@Value("${springjms.cardQueue}")
 	private String cardQueue;
 
-
-	
 	public void send(String message) {
-//		jmsTemplate.convertAndSend(accountQueue, message);
+		jmsTemplate.convertAndSend(accountQueue, message);
 //		jmsTemplate.convertAndSend(customerQueue, message);
-	//	jmsTemplate.convertAndSend(loanQueue,message);
-		jmsTemplate.convertAndSend(cardQueue,message);
+		// jmsTemplate.convertAndSend(loanQueue,message);
+//		jmsTemplate.convertAndSend(cardQueue,message);
 	}
 
 	@Test
 	public void testSendAndReceive() {
-//		send(accountMessage);
-		jmsTemplate.convertAndSend(accountQueue, message);
+		send(message);
+//		jmsTemplate.convertAndSend(accountQueue, message);
 //		send(accountMessage);
 //		send(customerMessage);
 //		send(loanMessage);
-		send(cardMessage);
-		
+//		send(cardMessage);
+
 	}
 
 }

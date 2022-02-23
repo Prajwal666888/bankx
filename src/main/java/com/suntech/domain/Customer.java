@@ -55,7 +55,6 @@ public class Customer extends IdDomain {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
 	private Shareholders shareholders;
 	
-	@OneToMany(cascade =  CascadeType.ALL)
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Account> accounts = new ArrayList<Account>();
@@ -173,8 +172,9 @@ public class Customer extends IdDomain {
 	@Override
 	public String toString() {
 		return "Customer [name=" + name + ", dob=" + dob + ", address=" + address + ", accountNo=" + accountNo
-				+ ", panNo=" + panNo + ", bank=" + bank + ", employee=" + employee + ", insurance=" + insurance
-				+ ", accounts=" + accounts + ", cards=" + cards + "]";
+				+ ", panNo=" + panNo + ", email=" + email + "]";
 	}
+
+	
 
 }

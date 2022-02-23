@@ -26,4 +26,10 @@ public class AccountServiceImpl implements AccountService {
 		return accountDao.save(account);
 	}
 
+	@Override
+	public synchronized Account getLatestAccount() {
+		Account account = accountDao.findTopByOrderByAccountNoDesc();
+		return account;
+	}
+
 }
