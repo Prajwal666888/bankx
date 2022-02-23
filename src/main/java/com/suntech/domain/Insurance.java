@@ -40,7 +40,7 @@ public class Insurance extends IdDomain {
 		this.type = type;
 		this.premium_payment = premium_payment;
 		this.term = term;
-		this.customers = customers;
+		this.customer = customers;
 	}
 
 	public String getIssuing_company() {
