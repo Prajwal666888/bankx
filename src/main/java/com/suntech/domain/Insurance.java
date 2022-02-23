@@ -30,7 +30,6 @@ public class Insurance extends IdDomain {
 
 	public Insurance() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Insurance(String issuing_company, String type, Double premium_payment, Integer term,

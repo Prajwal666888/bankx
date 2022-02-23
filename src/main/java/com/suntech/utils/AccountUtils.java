@@ -1,8 +1,19 @@
 package com.suntech.utils;
 
-import com.suntech.domain.Account;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.suntech.dao.AccountDao;
+import com.suntech.domain.Account;
+import com.suntech.service.AccountService;
+import com.suntech.service.support.AccountServiceImpl;
+
+
+@Component
 public class AccountUtils {
+
+	@Autowired
+	private  AccountService accountService;
 
 	public static Account createAccount() {
 		Account account = new Account();
@@ -18,4 +29,13 @@ public class AccountUtils {
 		account.setOverDraft(110.00);
 		return account;
 	}
+
+	public  Long generateAccountNumber() {
+		Account account = accountService.getLatestAccount();
+		if (account !=null) {
+			return account.getAccountNo() + 1L;
+		}
+		return 1L;
+	}
+
 }

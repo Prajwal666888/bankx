@@ -171,8 +171,9 @@ public class Customer extends IdDomain {
 	@Override
 	public String toString() {
 		return "Customer [name=" + name + ", dob=" + dob + ", address=" + address + ", accountNo=" + accountNo
-				+ ", panNo=" + panNo + ", bank=" + bank + ", employee=" + employee + ", insurance=" + insurance
-				+ ", accounts=" + accounts + ", cards=" + cards + "]";
+				+ ", panNo=" + panNo + ", email=" + email + "]";
 	}
+
+	
 
 }
