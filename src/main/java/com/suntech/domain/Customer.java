@@ -72,7 +72,6 @@ public class Customer extends IdDomain {
 	public Customer() {
 	}
 
-	
 	public Customer(String name, Date dob, String address, Long accountNo, String panNo,String email) {
 		super();
 		this.name = name;
@@ -80,11 +79,6 @@ public class Customer extends IdDomain {
 		this.address = address;
 		this.accountNo = accountNo;
 		this.panNo = panNo;
-		this.bank = bank;
-		this.employee = employee;
-		this.insurance = insurance;
-		this.accounts = accounts;
-		this.cards = cards;
 		this.email=email;
 	}
 

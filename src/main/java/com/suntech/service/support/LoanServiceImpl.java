@@ -11,7 +11,6 @@ import com.suntech.service.LoanService;
 
 @Service
 public class LoanServiceImpl implements LoanService{
-
 	
 	@Autowired
 	private LoanDao loanDao ;

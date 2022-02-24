@@ -1,7 +1,5 @@
 package com.suntech.service.support;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +14,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerDao customerDao;
-	
+
 	@Override
 	@Transactional
 	public Customer createAndSave(Customer customer) {
-//		if(customerValidation(customer)) {
-			customerDao.save(customer);
-//		} 
+		customerDao.save(customer);
 		return customer;
 	}
-	
-//	public boolean customerValidation(Customer customer) {
-//		
-//		List<Customer> customerList = customerDao.findAll();
-//			for(Customer c:customerList) {
-//				if(c.getAccountNo()!=customer.getAccountNo()) {
-//					return true;
-//				}
-//			}
-//			return false;
-//		
-//	}
 
 }

@@ -1,10 +1,6 @@
 package com.suntech.service;
 
-
-
 import com.suntech.domain.CustomerQuery;
-
-
 
 public interface CustomerqueryService {
 

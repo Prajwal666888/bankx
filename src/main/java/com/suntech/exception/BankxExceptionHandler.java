@@ -27,7 +27,6 @@ public class BankxExceptionHandler extends ResponseEntityExceptionHandler {
 	@Autowired
 	private ExceptionAuditService exceptionAuditService;
 
-	// handling the rest controller exception
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handellAllExceptions(Exception exception, WebRequest request) {
 		ExceptionAudit exceptionResponse = new ExceptionAudit(exception.getMessage(), request.toString(), new Date(),
