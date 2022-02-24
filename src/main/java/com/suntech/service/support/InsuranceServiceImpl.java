@@ -19,14 +19,12 @@ public class InsuranceServiceImpl implements InsuranceService {
 	private InsuranceDao insuranceDao;
 
 	@Override
-	
 	public Insurance createAndSaveInsurance(Insurance insurance) {
 		insuranceDao.save(insurance);
 		return insurance;
 	}
 	
 	@Override
-	
     public Insurance find(Integer id)
     {
     	return insuranceDao.findById(id).get();
@@ -34,7 +32,6 @@ public class InsuranceServiceImpl implements InsuranceService {
     
 	@Override
 	public List<Insurance> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Insurance>) insuranceDao.findAll();
 	}
 

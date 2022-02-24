@@ -3,10 +3,8 @@ package com.suntech.utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.suntech.dao.AccountDao;
 import com.suntech.domain.Account;
 import com.suntech.service.AccountService;
-import com.suntech.service.support.AccountServiceImpl;
 
 
 @Component

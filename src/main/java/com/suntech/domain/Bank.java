@@ -38,7 +38,6 @@ public class Bank extends IdDomain {
 	private List<Branches> branches = new ArrayList<Branches>();
 
 	public Bank() {
-
 	}
 
 	public Bank(String name, String type, String head_office, List<Atm> atm, List<Employee> employees,
