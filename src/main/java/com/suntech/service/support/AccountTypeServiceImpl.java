@@ -1,5 +1,7 @@
 package com.suntech.service.support;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class AccountTypeServiceImpl implements AccountTypeService {
 	private AccountTypeDao accountTypeDao;
 
 	@Override
+	@Transactional
 	public AccountType createAndSave(AccountType accountType) {
 		accountTypeDao.save(accountType);
 		return accountType;

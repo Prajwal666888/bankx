@@ -1,5 +1,7 @@
 package com.suntech.service.support;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class CardServiceImpl implements CardService {
 	private CardDao cardDao;
 	
 	@Override
+	@Transactional
 	public Card addCard(Card card) {
 		
 		cardDao.save(card);
