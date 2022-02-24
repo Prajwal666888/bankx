@@ -7,4 +7,6 @@ import com.suntech.domain.Account;
 
 public interface AccountDao extends JpaRepository<Account, Integer>{
 
+	Account findTopByOrderByAccountNoDesc();
+	
 }
