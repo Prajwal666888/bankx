@@ -18,6 +18,7 @@ public class AccountServiceImpl implements AccountService {
 	private AccountDao accountDao;
 
 	@Override
+	@Transactional
 	public Account createAndSave(Account account) {
 		return accountDao.save(account);
 	}
@@ -28,6 +29,5 @@ public class AccountServiceImpl implements AccountService {
 		return account;
 	}
 
-	
 
 }

@@ -8,10 +8,12 @@ import org.springframework.context.event.EventListener;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+
 import com.suntech.service.AccountService;
 import com.suntech.service.AccountTypeService;
 import com.suntech.service.BankService;
 import com.suntech.service.BranchService;
+
 
 @SpringBootApplication
 @EnableScheduling

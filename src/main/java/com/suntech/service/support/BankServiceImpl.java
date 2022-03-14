@@ -3,6 +3,8 @@ package com.suntech.service.support;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ public class BankServiceImpl implements BankService {
 	private BankDao bankDao;
 	
 	@Override
+	@Transactional
 	public Bank createAndSaveBank(Bank bank) {
 		bankDao.save(bank);
 		return bank;

@@ -1,6 +1,6 @@
 package com.suntech.service.support;
 
-import java.util.List;
+import javax.transaction.Transactional;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.suntech.dao.BankDao;
 import com.suntech.dao.BranchDao;
 import com.suntech.domain.Bank;
+
 import com.suntech.domain.Branches;
 import com.suntech.service.BankService;
 import com.suntech.service.BranchService;
@@ -25,6 +26,8 @@ public class BranchServiceImpl implements BranchService {
 	@Autowired
 	private BankDao bankDao;
 
+  @Override
+  @Transactional
 	public Branches createAndSaveBranch(Branches branches) {
 //		if(validateBranch(branches)) {
 		branchDao.save(branches);
