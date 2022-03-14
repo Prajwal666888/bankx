@@ -77,6 +77,7 @@ public class BankxController {
 	@Autowired
 	private CardService cardService;
 
+	@Autowired
 	private EmployeeService employeeService;
 
 	@Autowired
