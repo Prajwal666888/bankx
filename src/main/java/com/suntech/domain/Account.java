@@ -37,7 +37,7 @@ public class Account extends IdDomain {
 	@OneToMany(targetEntity = Card.class, cascade = CascadeType.ALL, mappedBy = "account")
 	private List<Card> cards = new ArrayList<Card>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
@@ -115,9 +115,9 @@ public class Account extends IdDomain {
 
 	@Override
 	public String toString() {
-		return "Account [accountNo=" + accountNo + ", balance=" + balance + ", overDraft=" + overDraft
-				+ ", accountType=" + accountType + ", loans=" + loans + ", cards=" + cards + ", customer=" + customer
-				+ "]";
+		return "Account [accountNo=" + accountNo + ", balance=" + balance + ", overDraft=" + overDraft + "]";
 	}
+
+
 
 }

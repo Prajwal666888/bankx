@@ -16,7 +16,6 @@ public class CustomerQuery extends IdDomain {
 
 	public CustomerQuery() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public CustomerQuery(String query, Boolean resolution) {

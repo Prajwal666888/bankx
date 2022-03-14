@@ -457,36 +457,68 @@
 
 		</addColumn>
 	</changeSet>
-	
+
 	<!--adding email column to shareholders -->
 	<changeSet author="sachin" id="shareholders.3">
 		<addColumn tableName="shareholders">
 			<column name="employee_id" type="int" />
 		</addColumn>
 	</changeSet>
-	
+
 	<!--adding email column to shareholders -->
 	<changeSet author="sachin" id="shareholders.4">
 		<addColumn tableName="shareholders">
 			<column name="customer_id" type="int" />
 		</addColumn>
 	</changeSet>
-	
+
 	<!-- Foreign key Constraints for shareholders -->
 	<changeSet author="sujay" id="shareholders.5">
 		<addForeignKeyConstraint
-			constraintName="fk_customer_shareholders_id" baseColumnNames="customer_id"
-			baseTableName="shareholders" referencedColumnNames="id"
-			referencedTableName="customer" />
+			constraintName="fk_customer_shareholders_id"
+			baseColumnNames="customer_id" baseTableName="shareholders"
+			referencedColumnNames="id" referencedTableName="customer" />
 	</changeSet>
-	
+
 	<!-- Foreign key Constraints for shareholders -->
 	<changeSet author="sujay" id="shareholders.6">
 		<addForeignKeyConstraint
-			constraintName="fk_employee_shareholders_id" baseColumnNames="employee_id"
-			baseTableName="shareholders" referencedColumnNames="id"
-			referencedTableName="employee" />
+			constraintName="fk_employee_shareholders_id"
+			baseColumnNames="employee_id" baseTableName="shareholders"
+			referencedColumnNames="id" referencedTableName="employee" />
+	</changeSet>
+
+	<!-- Change set for creation of Exception audit table -->
+	<changeSet author="sujay" id="exceptionaudit.1">
+		<createTable tableName="exceptionaudit">
+			<column autoIncrement="true" name="id" type="INT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="errormessage" type="VARCHAR2(255)" />
+			<column name="errorDetail" type="VARCHAR(255)" />
+			<column name="time" type="date" />
+			<column name="stacktrace" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+
+	<!-- Change set for column rename of Exception audit table -->
+	<changeSet author="sujay" id="exceptionaudit.2">
+		<renameColumn columnDataType="VARCHAR(255)"
+			newColumnName="errordetails" oldColumnName="errorDetail"
+			tableName="exceptionaudit" />
 	</changeSet>
 	
+	<!-- Change set for column datatype of Exception audit table -->
+	<changeSet author="sujay" id="exceptionaudit.3">
+		<modifyDataType columnName="stacktrace"
+			newDataType="LONGTEXT" tableName="exceptionaudit" />
+	</changeSet>
+	
+	<!-- Adding column to account_Type -->
+	<changeSet author="sandeep" id="account_type.5">
+		<addColumn tableName="account_type">
+			<column name="type" position="2" type="varchar(255)" />
+		</addColumn>
+	</changeSet>
 	
 </databaseChangeLog>

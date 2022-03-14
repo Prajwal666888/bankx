@@ -55,8 +55,6 @@ public class Customer extends IdDomain {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
 	private Shareholders shareholders;
 	
-	@OneToMany(cascade =  CascadeType.ALL)
-
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Account> accounts = new ArrayList<Account>();
 
@@ -74,8 +72,6 @@ public class Customer extends IdDomain {
 	public Customer() {
 	}
 
-	public Customer(String name, Date dob, String address, Long accountNo, String panNo, Bank bank, Employee employee,
-			Insurance insurance, List<Account> accounts, List<Card> cards) {
 	public Customer(String name, Date dob, String address, Long accountNo, String panNo,String email) {
 		super();
 		this.name = name;
@@ -83,11 +79,6 @@ public class Customer extends IdDomain {
 		this.address = address;
 		this.accountNo = accountNo;
 		this.panNo = panNo;
-		this.bank = bank;
-		this.employee = employee;
-		this.insurance = insurance;
-		this.accounts = accounts;
-		this.cards = cards;
 		this.email=email;
 	}
 
@@ -174,8 +165,9 @@ public class Customer extends IdDomain {
 	@Override
 	public String toString() {
 		return "Customer [name=" + name + ", dob=" + dob + ", address=" + address + ", accountNo=" + accountNo
-				+ ", panNo=" + panNo + ", bank=" + bank + ", employee=" + employee + ", insurance=" + insurance
-				+ ", accounts=" + accounts + ", cards=" + cards + "]";
+				+ ", panNo=" + panNo + ", email=" + email + "]";
 	}
+
+	
 
 }
