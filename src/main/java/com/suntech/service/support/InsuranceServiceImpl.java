@@ -29,7 +29,6 @@ public class InsuranceServiceImpl implements InsuranceService {
     
 	@Override
 	public List<Insurance> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Insurance>) insuranceDao.findAll();
 	}
 

@@ -65,7 +65,7 @@ public class BankxSchedular {
 
 	// */5 * * * * * (for every 5 second)
 
-	@Scheduled(cron = "0 0 * * *")
+	@Scheduled(cron = "0 0 * * * ?")
 	public void birthDaySchedular() throws Exception {
 
 		List<Customer> allCustomer = customerDao.findAll();
