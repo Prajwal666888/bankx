@@ -7,6 +7,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 
 import com.suntech.service.AccountService;
@@ -18,6 +19,7 @@ import com.suntech.service.BranchService;
 @SpringBootApplication
 @EnableScheduling
 @EnableJms
+@EnableWebSecurity
 public class BankxApplication {
 	
 	@Autowired

@@ -12,8 +12,7 @@ import com.suntech.service.AccountService;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-	protected final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
-
+	protected final	Logger logger=LoggerFactory.getLogger(AccountServiceImpl.class);
 	@Autowired
 	private AccountDao accountDao;
 

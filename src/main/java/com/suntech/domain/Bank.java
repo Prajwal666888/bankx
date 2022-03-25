@@ -20,7 +20,7 @@ public class Bank extends IdDomain {
 	private String type;
 
 	@Column(name = "head_office")
-	private String head_office;
+	private String headOffice;
 
 	@OneToMany(targetEntity = Atm.class, cascade = CascadeType.ALL, mappedBy = "bank")
 	private List<Atm> atm = new ArrayList<>();
@@ -40,12 +40,12 @@ public class Bank extends IdDomain {
 	public Bank() {
 	}
 
-	public Bank(String name, String type, String head_office, List<Atm> atm, List<Employee> employees,
+	public Bank(String name, String type, String headOffice, List<Atm> atm, List<Employee> employees,
 			List<Customer> customers, List<Shareholders> shareHolders, List<Branches> branches) {
 		super();
 		this.name = name;
 		this.type = type;
-		this.head_office = head_office;
+		this.headOffice = headOffice;
 		this.atm = atm;
 		this.employees = employees;
 		this.customers = customers;
@@ -70,11 +70,11 @@ public class Bank extends IdDomain {
 	}
 
 	public String getHead_office() {
-		return head_office;
+		return headOffice;
 	}
 
 	public void setHead_office(String head_office) {
-		this.head_office = head_office;
+		this.headOffice = head_office;
 	}
 
 	public List<Atm> getAtm() {
