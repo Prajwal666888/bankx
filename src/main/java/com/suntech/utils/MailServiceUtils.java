@@ -20,8 +20,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailServiceUtils {
 
-	
-
 	/**
 	 * @param receiverMail
 	 * @param content

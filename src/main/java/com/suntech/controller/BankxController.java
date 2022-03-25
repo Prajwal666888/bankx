@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,10 +43,12 @@ import com.suntech.domain.Employee;
 import com.suntech.domain.Insurance;
 import com.suntech.domain.Loans;
 import com.suntech.model.AccountOpeningModel;
+
 import com.suntech.request.LoginRequest;
 import com.suntech.request.SignupRequest;
 import com.suntech.response.JwtResponse;
 import com.suntech.response.MessageResponse;
+
 import com.suntech.service.AccountTypeService;
 import com.suntech.service.BankService;
 import com.suntech.service.BranchService;
@@ -71,6 +74,7 @@ import io.swagger.annotations.ApiResponses;
  * @author PRAJWAL.H R
  *
  */
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")

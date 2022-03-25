@@ -562,5 +562,11 @@
 
 		</createTable>
 	</changeSet>
-
+	
+	<!-- Adding column to account_Type -->
+	<changeSet author="sandeep" id="account_type.5">
+		<addColumn tableName="account_type">
+			<column name="type" position="2" type="varchar(255)" />
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>
