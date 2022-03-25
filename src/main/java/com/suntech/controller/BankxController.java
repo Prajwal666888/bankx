@@ -79,98 +79,88 @@ public class BankxController {
 
 	private static final String SUCCESS_MESSAGE = "Account has been successfully opened.";
 	private static final String FAILURE_MESSAGE = "Failed to open account.";
-	
-	  @Autowired
-	  AuthenticationManager authenticationManager;
 
-	  @Autowired
-	  UserRepository userRepository;
+	@Autowired
+	AuthenticationManager authenticationManager;
 
-	  @Autowired
-	  RoleRepository roleRepository;
+	@Autowired
+	UserRepository userRepository;
 
-	  @Autowired
-	  PasswordEncoder encoder;
+	@Autowired
+	RoleRepository roleRepository;
 
-	  @Autowired
-	  JwtUtils jwtUtils;
-	  
-	 
-	  @PostMapping("/signin")
-	  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	@Autowired
+	PasswordEncoder encoder;
 
-	    Authentication authentication = authenticationManager.authenticate(
-	        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+	@Autowired
+	JwtUtils jwtUtils;
 
-	    SecurityContextHolder.getContext().setAuthentication(authentication);
-	    String jwt = jwtUtils.generateJwtToken(authentication);
-	    
-	    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();    
-	    List<String> roles = userDetails.getAuthorities().stream()
-	        .map(item -> item.getAuthority())
-	        .collect(Collectors.toList());
+	@PostMapping("/signin")
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-	    return ResponseEntity.ok(new JwtResponse(jwt, 
-	                         userDetails.getId(), 
-	                         userDetails.getUsername(), 
-	                         userDetails.getEmail(), 
-	                         roles));
-	  }
-	  
-	  @PostMapping("/signup")
-	  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-	    if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-	      return ResponseEntity
-	          .badRequest()
-	          .body(new MessageResponse("Error: Username is already taken!"));
-	    }
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-	    if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-	      return ResponseEntity
-	          .badRequest()
-	          .body(new MessageResponse("Error: Email is already in use!"));
-	    }
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
 
-	    // Create new user's account
-	    User user = new User(signUpRequest.getUsername(), 
-	               signUpRequest.getEmail(),
-	               encoder.encode(signUpRequest.getPassword()));
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+				.collect(Collectors.toList());
 
-	    Set<String> strRoles = signUpRequest.getRole();
-	    Set<Role> roles = new HashSet<>();
+		return ResponseEntity.ok(
+				new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+	}
 
-	    if (strRoles == null) {
-	      Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-	          .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-	      roles.add(userRole);
-	    } else {
-	      strRoles.forEach(role -> {
-	        switch (role) {
-	        case "admin":
-	          Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-	          roles.add(adminRole);
+	@PostMapping("/signup")
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+		}
 
-	          break;
-	        case "mod":
-	          Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-	          roles.add(modRole);
-	 
-	          break;
-	        default:
-	          Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-	          roles.add(userRole);
-	        }
-	      });
-	    }
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+		}
 
-	    user.setRoles(roles);
-	    userRepository.save(user);
+		// Create new user's account
+		User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
+				encoder.encode(signUpRequest.getPassword()));
 
-	    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-	  }
+		Set<String> strRoles = signUpRequest.getRole();
+		Set<Role> roles = new HashSet<>();
+
+		if (strRoles == null) {
+			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+			roles.add(userRole);
+		} else {
+			strRoles.forEach(role -> {
+				switch (role) {
+				case "admin":
+					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(adminRole);
+					break;
+
+				case "mod":
+					Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(modRole);
+					break;
+
+				default:
+					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(userRole);
+				}
+			});
+		}
+
+		user.setRoles(roles);
+		userRepository.save(user);
+
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
 
 	@Autowired
 	private MailServiceUtils mailServiceUtils;
@@ -261,7 +251,6 @@ public class BankxController {
 	@JmsListener(destination = "${springjms.cardQueue}")
 	public void receiveFromcardQueue(String message) {
 		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
-
 		Card card = gson.fromJson(message, Card.class);
 		cardService.addCard(card);
 
@@ -273,6 +262,7 @@ public class BankxController {
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
 	@PostMapping("/bank")
+	@PreAuthorize("hasRole('ADMIN')")
 	public Bank insertBank(@RequestBody() Bank bank) {
 		bankService.createAndSaveBank(bank);
 		return bank;
@@ -284,6 +274,7 @@ public class BankxController {
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
 	@PostMapping("/branch")
+	@PreAuthorize("hasRole('ADMIN')")
 	public Branches insertBranches(@RequestBody() Branches branches) {
 		branchService.createAndSaveBranch(branches);
 		return branches;
@@ -294,8 +285,8 @@ public class BankxController {
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
-
 	@PostMapping("/card")
+	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
 	public Card addCard(@RequestBody() Card card) {
 		return cardService.addCard(card);
 	}
@@ -306,6 +297,7 @@ public class BankxController {
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
 	@PostMapping("/employee")
+	@PreAuthorize("hasRole('ADMIN')")
 	public Employee insertEmployee(@RequestBody() Employee employee) {
 		employeeService.createandSave(employee);
 		return employee;
@@ -317,17 +309,17 @@ public class BankxController {
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
 	@PostMapping("/insurance")
+	@PreAuthorize("hasRole('ADMIN')")
 	public Insurance insertInsurance(@RequestBody() Insurance insurance) {
 		insuranceService.createAndSaveInsurance(insurance);
 		return insurance;
 	}
 
-//	@ApiOperation(value = "List of Insurance", response = Insurance.class)
-//	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
-//			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
-//			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-//			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
-
+	@ApiOperation(value = "List of Insurance", response = Insurance.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
 	@GetMapping("/insurance")
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public List<Insurance> getInsurance() {
